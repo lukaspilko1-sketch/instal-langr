@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+
+<html class="light" lang="cs"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#e4e2df",
+                    "on-secondary-container": "#ffffff",
+                    "inverse-primary": "#9ecaff",
+                    "secondary-fixed-dim": "#b0c8e9",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#dbdad7",
+                    "on-secondary-fixed-variant": "#314864",
+                    "on-tertiary-fixed-variant": "#6d3a00",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb77a",
+                    "primary": "#1a6fb5",
+                    "on-tertiary-container": "#2e1500",
+                    "primary-fixed-dim": "#9ecaff",
+                    "tertiary": "#7f4400",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#c4dcfd",
+                    "on-background": "#1b1c1a",
+                    "surface-tint": "#1a6fb5",
+                    "outline": "#717782",
+                    "surface-container-high": "#f5f3f0",
+                    "on-primary-container": "#ffffff",
+                    "inverse-on-surface": "#f2f0ed",
+                    "secondary-fixed": "#d1e4ff",
+                    "inverse-surface": "#30312f",
+                    "surface-container": "#efeeeb",
+                    "tertiary-fixed": "#ffdcc2",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#c1c7d2",
+                    "on-primary-fixed-variant": "#00497d",
+                    "surface-variant": "#e4e2df",
+                    "primary-container": "#1a6fb5",
+                    "on-error-container": "#93000a",
+                    "background": "#fbf9f6",
+                    "on-surface-variant": "#414751",
+                    "primary-fixed": "#d1e4ff",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "surface": "#fbf9f6",
+                    "surface-bright": "#fbf9f6",
+                    "tertiary-container": "#ffdcc2",
+                    "on-primary-fixed": "#001d36",
+                    "on-secondary-fixed": "#001d36",
+                    "surface-container-low": "#f5f3f0",
+                    "on-tertiary": "#ffffff",
+                    "secondary": "#49607c",
+                    "on-surface": "#1b1c1a",
+                    "on-tertiary-fixed": "#2e1500"
+            },
+            "borderRadius": {
+                    "DEFAULT": "4px",
+                    "lg": "4px",
+                    "xl": "8px",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    .editorial-grain {
+        position: relative
+    }
+    .editorial-grain::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuD7is5kos_t8dnJO94x2qXamXnKwtNZ42ZKME-BPxrj3PvxfEUnbL2aBYK62Jf2QS8uFwATGq3Xo70IGEUURPRlSKGJ8hdpAAfwGtde9HQhx4RYAQS4aBD_WtlRNG_waMC1OVDTBuGhO1iRsal5RDv53S2atL4tQMAbePJmudlxVRmKiwurgomI4XGwAyeDnVomOJv-y7_SL85aDJZKhUSkSz7jHpbtQdRtclJ3-IBM5G7oOZIzb89qlX6iVk35I-MamGQtHKzzEw);
+        opacity: 0.03;
+        pointer-events: none;
+        z-index: 10
+    }
+    .hairline-y {
+        width: 1px;
+        background-color: rgba(113, 119, 130, 0.2)
+    }
+    .hairline-x {
+        height: 1px;
+        background-color: rgba(113, 119, 130, 0.2)
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .reveal {
+        opacity: 0;
+        transition: all 0.8s ease-out;
+    }
+    
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .reveal-from-bottom {
+        transform: translateY(30px);
+    }
+
+    /* === Smooth scroll === */
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+
+    /* === Scroll progress bar === */
+    #scroll-progress {
+        position: fixed;
+        top: 0; left: 0;
+        height: 2px;
+        background: #1a6fb5;
+        z-index: 9999;
+        width: 0%;
+        transition: width 0.08s linear;
+    }
+
+    /* === Nav na scrollu === */
+    nav { transition: background 0.4s ease, box-shadow 0.4s ease; }
+    nav.scrolled {
+        background: rgba(255,255,255,0.98) !important;
+        box-shadow: 0 2px 24px rgba(0,0,0,0.07);
+    }
+
+    /* === Nav link underline slide === */
+    .nav-link { position: relative; }
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -4px; left: 0;
+        width: 0; height: 1px;
+        background: #1a6fb5;
+        transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link.is-active { color: #1a6fb5 !important; }
+    .nav-link.is-active::after { width: 100%; }
+
+    /* === Hamburger === */
+    .hamburger-line {
+        display: block;
+        width: 22px; height: 1.5px;
+        background: #1a6fb5;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        transform-origin: center;
+    }
+    #hamburger-btn.open .hamburger-line:nth-child(1) { transform: translateY(4.75px) rotate(45deg); }
+    #hamburger-btn.open .hamburger-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    #hamburger-btn.open .hamburger-line:nth-child(3) { transform: translateY(-4.75px) rotate(-45deg); }
+
+    /* === Mobilní menu === */
+    #mobile-menu {
+        transform: translateX(100%);
+        transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    #mobile-menu.open { transform: translateX(0); }
+    #mobile-menu a {
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+    }
+    #mobile-menu a::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0;
+        width: 0; height: 1px;
+        background: #1a6fb5;
+        transition: width 0.4s ease;
+    }
+    #mobile-menu a:hover::after { width: 100%; }
+
+    /* === Shimmer na tlačítkách === */
+    .btn-shimmer {
+        position: relative;
+        overflow: hidden;
+    }
+    .btn-shimmer::after {
+        content: '';
+        position: absolute;
+        top: 0; left: -80%;
+        width: 50%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+        transform: skewX(-20deg);
+        transition: left 0.65s ease;
+    }
+    .btn-shimmer:hover::after { left: 150%; }
+
+    /* === Stats čísla === */
+    .stat-block { transition: transform 0.4s ease; }
+    .stat-block:hover { transform: translateY(-4px); }
+    .counter { display: inline-block; font-variant-numeric: tabular-nums; }
+
+    /* === Service cards === */
+    .service-card {
+        transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.35s ease !important;
+    }
+    .service-card:hover {
+        transform: translateY(-8px) !important;
+        box-shadow: 0 28px 56px rgba(26, 111, 181, 0.11) !important;
+        background-color: #f0efec !important;
+    }
+    .service-card:hover .service-title { color: #1a6fb5; }
+    .service-title { transition: color 0.3s ease; }
+    .service-num {
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .service-card:hover .service-num {
+        opacity: 0.35 !important;
+        transform: translateX(0) scale(1.05);
+    }
+
+    /* === Portfolio overlay === */
+    .portfolio-item { position: relative; overflow: hidden; }
+    .portfolio-item img {
+        transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), filter 0.6s ease !important;
+    }
+    .portfolio-item:hover img { transform: scale(1.07) !important; filter: grayscale(0%) !important; }
+    .portfolio-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(26, 111, 181, 0.82);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.45s ease;
+    }
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+    .portfolio-overlay-icon {
+        transform: scale(0.6) rotate(-10deg);
+        transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+        color: white;
+    }
+    .portfolio-item:hover .portfolio-overlay-icon { transform: scale(1) rotate(0deg); }
+
+    /* === Testimonials hover drift === */
+    .testimonial-block { transition: transform 0.45s ease; }
+    .testimonial-block:hover { transform: translateX(10px); }
+    .testimonial-block-right:hover { transform: translateX(-10px); }
+
+    /* === Form fields === */
+    .form-field { transition: border-color 0.3s ease; }
+    .form-field:focus-within { border-color: #1a6fb5 !important; }
+    .form-field label { transition: color 0.3s ease; }
+    .form-field:focus-within label { color: #1a6fb5; }
+
+    /* === Kontaktní info hover === */
+    .contact-link {
+        position: relative;
+        display: inline-block;
+    }
+    .contact-link::after {
+        content: '';
+        position: absolute;
+        bottom: -2px; left: 0;
+        width: 0; height: 1px;
+        background: #1a6fb5;
+        transition: width 0.4s ease;
+    }
+    .contact-link:hover::after { width: 100%; }
+
+    /* === Custom scrollbar === */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #fbf9f6; }
+    ::-webkit-scrollbar-thumb { background: #1a6fb5; border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00497d; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- Scroll progress bar -->
+<div id="scroll-progress"></div>
+<!-- TopNavBar Shell -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-12 py-4 max-w-[1920px] mx-auto bg-white/80 backdrop-blur-xl border-b border-outline-variant/10">
+<div class="flex items-center gap-2">
+<svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M12,2A10,10,0,0,0,2,12a10,10,0,0,0,10,10,10,10,0,0,0,10-10A10,10,0,0,0,12,2Zm5.5,14.5a1,1,0,0,1-1,1H7.5a1,1,0,0,1-1-1v-2a1,1,0,0,1-1-1h1v-1a4.5,4.5,0,0,1,9,0v1h1a1,1,0,0,1,1,1ZM15,10V9a3,3,0,0,0-6,0v1H9a1,1,0,0,1,1-1,2,2,0,0,1,4,0,1,1,0,0,1,1,1Z"></path>
+</svg>
+<div class="text-3xl font-bold font-headline text-primary tracking-tighter">LANGR</div>
+<span class="ml-4 text-[10px] tracking-[0.2em] uppercase text-on-surface-variant/60 font-sans font-bold border-l border-outline-variant/30 pl-4 py-1 block">Když to teče, víme proč</span>
+</div>
+<div class="hidden md:flex items-center gap-10" aria-label="Hlavní navigace">
+<a class="nav-link tracking-widest uppercase text-xs font-sans text-on-surface-variant hover:text-primary transition-colors duration-300" href="#sluzby">S čím pomůžu</a>
+<a class="nav-link tracking-widest uppercase text-xs font-sans text-on-surface-variant hover:text-primary transition-colors duration-300" href="#kdo-jsem">Kdo jsem</a>
+<a class="nav-link tracking-widest uppercase text-xs font-sans text-on-surface-variant hover:text-primary transition-colors duration-300" href="#prace">Moje práce</a>
+<a class="nav-link tracking-widest uppercase text-xs font-sans text-on-surface-variant hover:text-primary transition-colors duration-300" href="#kontakt">Kontakt</a>
+</div>
+<div class="flex items-center gap-4">
+<a class="hidden md:inline-block btn-shimmer bg-primary text-on-primary px-6 py-2.5 tracking-widest uppercase text-xs font-bold hover:bg-primary/90 hover:shadow-lg transition-all duration-300 active:scale-95 text-center" href="#kontakt">POPTAT PRÁCI</a>
+<button id="hamburger-btn" class="md:hidden flex flex-col gap-[5px] p-2 cursor-pointer" aria-label="Otevřít menu">
+<span class="hamburger-line"></span>
+<span class="hamburger-line"></span>
+<span class="hamburger-line"></span>
+</button>
+</div>
+</nav>
+<!-- Mobilní menu -->
+<div id="mobile-menu" class="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-10 md:hidden">
+<a class="font-headline text-4xl text-on-surface hover:text-primary transition-colors pb-1" href="#sluzby">S čím pomůžu</a>
+<a class="font-headline text-4xl text-on-surface hover:text-primary transition-colors pb-1" href="#kdo-jsem">Kdo jsem</a>
+<a class="font-headline text-4xl text-on-surface hover:text-primary transition-colors pb-1" href="#prace">Moje práce</a>
+<a class="font-headline text-4xl text-on-surface hover:text-primary transition-colors pb-1" href="#kontakt">Kontakt</a>
+<a class="btn-shimmer mt-4 bg-primary text-on-primary px-10 py-4 text-sm tracking-widest uppercase font-bold hover:bg-primary/90 transition-all active:scale-95" href="#kontakt">POPTAT PRÁCI</a>
+</div>
+<main class="editorial-grain">
+<!-- Hero Section - Adjusted for sticky header and mobile readability -->
+<section class="relative min-h-[600px] md:h-screen flex flex-col md:flex-row items-center overflow-hidden">
+<div class="w-full md:w-1/2 h-[400px] md:h-full relative z-10 order-2 md:order-1 reveal reveal-from-bottom active" style="transition-delay: 0.1s">
+<img alt="Lukáš Langr" class="w-full h-full object-cover object-top md:object-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs5jmmpUbo2HrC_MvOFVD_kU5HFnR42ugVf6FU6t1Svi8rMmKrmgdbVNN0QOH1RmbGc79RJL8yKBrkhlGI_SZH84lnoI9d-UdY8DoZ0fTLDgGpTntUqZMpGroK6Z0dEtsrKP__pauTT8E3NWlIa627e6ZmNikmKFaD6tC1QFtEVBVmLtblYhozg9GpL_CX8PzK2MFYT76qb37iVzutki-gPGPZvyaHq6li1HGXroD9XkNRb5e0_Ky_EbVmDXCVMKfS6lBlsYCggQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent md:bg-gradient-to-r md:from-background/20 md:to-transparent"></div>
+</div>
+<div class="w-full md:w-1/2 px-6 md:px-16 pt-32 pb-12 md:py-0 z-20 relative order-1 md:order-2 md:mt-24 reveal reveal-from-bottom active" style="transition-delay: 0.3s">
+<p class="label-md text-primary tracking-[0.3em] uppercase mb-4 text-sm font-bold">INSTALATÉRSKÉ SLUŽBY</p>
+<h1 class="font-headline text-4xl md:text-6xl lg:text-7xl leading-tight text-on-surface mb-8 md:-ml-32">
+                Nejsem firma.<br/>
+<span class="italic font-normal text-primary">Jsem Lukáš Langr.</span>
+</h1>
+<p class="max-w-md text-on-surface-variant text-base md:text-lg leading-relaxed mb-10">
+                Osobní přístup není marketingová fráze. Je to závazek preciznosti, kterou věnuji každému spoji, ventilu a projektu. Vaše instalace není zakázka, je to mé řemeslo.
+            </p>
+<div class="flex items-center gap-8">
+<a class="btn-shimmer bg-primary text-on-primary px-8 py-4 text-sm tracking-widest uppercase font-bold hover:bg-primary/90 hover:shadow-xl transition-all active:scale-95 shadow-lg text-center" href="#kontakt">ZAČÍT PROJEKT</a>
+<div class="hairline-x w-16 hidden lg:block"></div>
+</div>
+</div>
+<!-- Decorative Blueprint Element -->
+<div class="absolute bottom-8 right-8 hidden lg:block opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-primary text-[10rem]" data-weight="fill">architecture</span>
+</div>
+</section>
+<!-- Stats Strip -->
+<section class="bg-primary py-10 px-6 overflow-hidden">
+<div class="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-around gap-8 md:gap-4">
+<div class="stat-block text-center text-on-primary reveal reveal-from-bottom" style="transition-delay:0.1s">
+<p class="font-headline text-5xl md:text-6xl font-bold"><span class="counter" data-target="10">0</span>+</p>
+<p class="text-xs tracking-[0.3em] uppercase mt-2 opacity-70 font-bold">Let praxe</p>
+</div>
+<div class="hidden md:block hairline-y h-14 opacity-30"></div>
+<div class="stat-block text-center text-on-primary reveal reveal-from-bottom" style="transition-delay:0.2s">
+<p class="font-headline text-5xl md:text-6xl font-bold"><span class="counter" data-target="200">0</span>+</p>
+<p class="text-xs tracking-[0.3em] uppercase mt-2 opacity-70 font-bold">Realizací</p>
+</div>
+<div class="hidden md:block hairline-y h-14 opacity-30"></div>
+<div class="stat-block text-center text-on-primary reveal reveal-from-bottom" style="transition-delay:0.3s">
+<p class="font-headline text-5xl md:text-6xl font-bold">Praha</p>
+<p class="text-xs tracking-[0.3em] uppercase mt-2 opacity-70 font-bold">&amp; Středočeský kraj</p>
+</div>
+</div>
+</section>
+<!-- Services Section (Expertíza) -->
+<section class="bg-surface-container-lowest py-20 md:py-24 px-6 md:px-12 relative overflow-hidden" id="sluzby">
+<div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
+<div class="md:col-span-4 mb-12 md:mb-0 reveal reveal-from-bottom md:pt-12">
+<span class="text-primary text-xs tracking-[0.4em] uppercase block mb-4 font-bold">Expertíza</span>
+<h2 class="font-headline text-5xl text-on-surface mb-8">Technická<br/>Preciznost</h2>
+<p class="text-on-surface-variant max-w-xs">Každý systém je navržen s ohledem na energetickou efektivitu a dlouhodobou stabilitu.</p>
+</div>
+<div class="md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 md:gap-y-16">
+<div class="service-card group reveal reveal-from-bottom bg-surface-container p-8 border border-outline-variant/10 shadow-sm rounded-lg" style="transition-delay: 0.1s">
+<span class="service-num font-headline text-primary/10 text-8xl block -mb-12 translate-x-[-10px] group-hover:text-primary/20 transition-colors">01</span>
+<h3 class="service-title font-headline text-3xl mb-4 relative z-10 text-on-surface">Vodoinstalace</h3>
+<p class="text-on-surface-variant text-sm leading-loose border-outline-variant/20">
+                        Od rozvodů v novostavbách po citlivé rekonstrukce historických objektů. Používáme výhradně měď a certifikované systémy REHAU.
+                    </p>
+</div>
+<div class="service-card group md:mt-20 reveal reveal-from-bottom bg-surface-container p-8 border border-outline-variant/10 shadow-sm rounded-lg" style="transition-delay: 0.2s">
+<span class="service-num font-headline text-primary/10 text-8xl block -mb-12 translate-x-[-10px] group-hover:text-primary/20 transition-colors">02</span>
+<h3 class="service-title font-headline text-3xl mb-4 relative z-10 text-on-surface">Vytápění</h3>
+<p class="text-on-surface-variant text-sm leading-loose border-outline-variant/20">
+                        Podlahové systémy a tepelná čerpadla. Návrh hydraulického vyvážení pro maximální tepelný komfort bez zbytečných nákladů.
+                    </p>
+</div>
+<div class="service-card group reveal reveal-from-bottom bg-surface-container p-8 border border-outline-variant/10 shadow-sm rounded-lg" style="transition-delay: 0.3s">
+<span class="service-num font-headline text-primary/10 text-8xl block -mb-12 translate-x-[-10px] group-hover:text-primary/20 transition-colors">03</span>
+<h3 class="service-title font-headline text-3xl mb-4 relative z-10 text-on-surface">Plynoinstalace</h3>
+<p class="text-on-surface-variant text-sm leading-loose border-outline-variant/20">
+                        Revize, montáže a servis kondenzačních kotlů. Bezpečnost není volba, je to standard, přes který nejede vlak.
+                    </p>
+</div>
+<div class="service-card group md:mt-20 reveal reveal-from-bottom bg-surface-container p-8 border border-outline-variant/10 shadow-sm rounded-lg" style="transition-delay: 0.4s">
+<span class="service-num font-headline text-primary/10 text-8xl block -mb-12 translate-x-[-10px] group-hover:text-primary/20 transition-colors">04</span>
+<h3 class="service-title font-headline text-3xl mb-4 relative z-10 text-on-surface">Koupelny</h3>
+<p class="text-on-surface-variant text-sm leading-loose border-outline-variant/20">
+                        Kompletní realizace na klíč. Od podomítkových těles po finální designové baterie AXOR a Hansgrohe.
+                    </p>
+</div>
+</div>
+</div>
+<div class="absolute top-0 right-[20%] hairline-y h-full opacity-10"></div>
+</section>
+<!-- About Section (The Letter) - Compacted -->
+<section class="py-12 md:py-16 px-6 md:px-0 bg-white" id="kdo-jsem">
+<div class="max-w-4xl mx-auto border-l border-outline-variant/30 pl-8 md:pl-16 py-2 reveal reveal-from-bottom">
+<p class="font-headline text-primary italic text-xl mb-4">O mně</p>
+<h2 class="font-headline text-3xl md:text-4xl mb-6 leading-tight text-on-surface">
+                Deset let v oboru mě naučilo, že nejdůležitějším nástrojem není klíč, ale trpělivost.
+            </h2>
+<div class="space-y-4 text-on-surface-variant text-lg leading-relaxed max-w-2xl">
+<p>
+                    Narodil jsem se do rodiny řemeslníků. Už jako kluk jsem sledoval, jak se pod rukama mistrů mění surový materiál ve funkční celek. Dnes toto dědictví nesu dál, ale s moderním technickým vybavením a smyslem pro detail, který v masové produkci chybí.
+                </p>
+<p>
+                    Když přijdu k vám domů, nejdu jen "opravit trubku". Hledám řešení, které bude fungovat desetiletí. Používám materiály, za které se mohu zaručit svým jménem. 
+                </p>
+<p class="font-headline italic text-on-surface pt-4">
+                    S úctou k řemeslu,<br/>
+                    Lukáš Langr
+                </p>
+</div>
+</div>
+</section>
+<!-- Portfolio -->
+<section class="py-20 md:py-24 px-6 bg-white" id="prace">
+<div class="text-center mb-16 reveal reveal-from-bottom">
+<p class="label-md text-primary tracking-[0.4em] uppercase mb-4 font-bold">Kde už jsem pomohl</p>
+<h2 class="font-headline text-5xl text-on-surface">Ukázky mé práce</h2>
+</div>
+<div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="space-y-8 reveal reveal-from-bottom" style="transition-delay: 0.1s">
+<div class="portfolio-item group overflow-hidden bg-surface-container-low shadow-sm hover:shadow-xl transition-all duration-500">
+<img class="w-full aspect-[4/5] object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbmN2HuwOeIiKBfPtmzFs1KT6m8aFfuRjyNpK5jaMktdy4M6pPkNn5dLDWrF6hgXTnTQJECybiRJzq-uHY2V4RSRTtTJagWLVyfaF-FzvzFadllRohFrBd9tMmFo2F_-mmGTdM1DwAQlyDrLucj47LHB8Ld_amBbW_vheLFMaVBnNMTV1unWAUcvSGg0tvnoyXYNqRV_oLK6afFLodjYWEwbmQGffIMxRZdV7I5ZbuR91kB1xndHRAbFBsMQzRxZUNSVyfVw9E1w"/>
+<div class="p-6">
+<p class="text-xs text-primary uppercase tracking-widest mb-2 font-bold">Technika</p>
+<h4 class="font-headline text-xl text-on-surface">Měděné rozvodné systémy</h4>
+<div class="portfolio-overlay"><span class="material-symbols-outlined portfolio-overlay-icon text-6xl" aria-hidden="true">zoom_in</span></div>
+</div>
+</div>
+</div>
+<div class="space-y-8 md:pt-20 reveal reveal-from-bottom" style="transition-delay: 0.2s">
+<div class="portfolio-item group overflow-hidden bg-surface-container-low shadow-sm hover:shadow-xl transition-all duration-500">
+<img class="w-full aspect-square object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLS7bmQVkHq9OIFkOHtSfNTMHHOocEjYrVXplRPmX0K1n-3cBRDX8hTSCfr4qGsK88KRVY9JiF2mHLdJOiBrY5sQTj3zFT8Hay70LULvW1UC_dwIn4xTebxazvsQv441TKaUV4uwYgl0RdDVezyBFPszR2N0wN1B7oSvhuHpvsui6UVmGOdFa5T-n5w_ztDZle7DlD5eCEzTqf8L-wCY7PyYOkF6dg_RFEs0LFxcpObz5w9Q5gfKuaUMv_5n-VXjNPdD63TG2Xzw"/>
+<div class="p-6">
+<p class="text-xs text-primary uppercase tracking-widest mb-2 font-bold">Design</p>
+<h4 class="font-headline text-xl text-on-surface">Koupelna v soukromé rezidenci</h4>
+<div class="portfolio-overlay"><span class="material-symbols-outlined portfolio-overlay-icon text-6xl" aria-hidden="true">zoom_in</span></div>
+</div>
+</div>
+<div class="portfolio-item group overflow-hidden bg-surface-container-low shadow-sm hover:shadow-xl transition-all duration-500">
+<img class="w-full aspect-[3/4] object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0UXMjKa0gWThy44q-2zo8SoKTZFY9QeEMntxjhRWRwNcrmZiUdZnrtMsiW_X5ssGLflpIQdyu9kW-7iGXY5ZxOOCaekVgx6Z8xqSV5R8CjaizGS0ENc68atX2rMSO4lsnmrh6PO_mZEF0EZOZvevfwrIG-NB9kmfn_piMdnWZPHMjRxI4_4jXkc7G95NEJanxx4jivXc-v0INAPEGJ7SYMn68Aend0009eOe_DL1LWW2ho1Wi-GGuX0LCqoXM1gfht1fVZ0ywbQ"/>
+<div class="p-6">
+<p class="text-xs text-primary uppercase tracking-widest mb-2 font-bold">Technika</p>
+<h4 class="font-headline text-xl text-on-surface">Centrální topný uzel</h4>
+<div class="portfolio-overlay"><span class="material-symbols-outlined portfolio-overlay-icon text-6xl" aria-hidden="true">zoom_in</span></div>
+</div>
+</div>
+</div>
+<div class="space-y-8 reveal reveal-from-bottom" style="transition-delay: 0.3s">
+<div class="portfolio-item group overflow-hidden bg-surface-container-low shadow-sm hover:shadow-xl transition-all duration-500">
+<img class="w-full aspect-[4/5] object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAGmMnqxAFODlFPALW2roDXUjPFYLDba7tFdI63K8RDlMsIkXQpt9cUHyQx1Fa0X8_GobCfGKi-KL1KumWCIO9ISByXfJ3HwaGdZ8pWr7J_sPnCy0PNxd2Y6pYQ6kG5bvy9oZ0EUy3e0Kyxog7P_D3FGAkqB_jiUzcaogi-LPU9ueNHOO4QgVAE6rFR5NUS4tzjqMumsppEZpV1gBXmC5j6WH430HDrArQiX9iQrC9aqZsFkbU2uQBU1ST0eSXsz0uD6llGLvWfQ"/>
+<div class="p-6">
+<p class="text-xs text-primary uppercase tracking-widest mb-2 font-bold">Řemeslo</p>
+<h4 class="font-headline text-xl text-on-surface">Nástroje mistra svého oboru</h4>
+<div class="portfolio-overlay"><span class="material-symbols-outlined portfolio-overlay-icon text-6xl" aria-hidden="true">zoom_in</span></div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-16 text-center reveal reveal-from-bottom">
+<a class="btn-shimmer inline-block bg-primary text-on-primary px-10 py-5 font-bold tracking-[0.2em] uppercase hover:bg-primary/90 hover:scale-105 hover:shadow-xl transition-all shadow-lg active:scale-95" href="#kontakt">ZOBRAZIT VŠECHNY REFERENCE</a>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="bg-surface-container-low py-20 px-6">
+<div class="max-w-4xl mx-auto space-y-16">
+<div class="testimonial-block border-t border-outline-variant/30 pt-12 reveal reveal-from-bottom">
+<span class="material-symbols-outlined text-primary mb-6 text-4xl" aria-hidden="true">format_quote</span>
+<p class="font-headline text-2xl md:text-3xl italic leading-tight mb-8 text-on-surface">
+                    "Hledali jsme někoho na rekonstrukci koupelny v památkové zóně. Pan Langr k práci přistoupil s takovou úctou k původním materiálům, kterou jsme u jiných firem nenašli."
+                </p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-px bg-primary"></div>
+<p class="text-sm tracking-widest uppercase font-bold text-on-surface">Ing. Tomáš Beran, Praha</p>
+</div>
+</div>
+<div class="testimonial-block testimonial-block-right border-t border-outline-variant/30 pt-12 ml-auto max-w-2xl text-right reveal reveal-from-bottom" style="transition-delay: 0.2s">
+<span class="material-symbols-outlined text-primary mb-6 text-4xl" aria-hidden="true">format_quote</span>
+<p class="font-headline text-2xl md:text-3xl italic leading-tight mb-8 text-on-surface">
+                    "Technické řešení vytápění našeho domu je mistrovské dílo. Žádné zbytečné ventily, vše čisté a perfektně funkční."
+                </p>
+<div class="flex items-center gap-4 justify-end">
+<p class="text-sm tracking-widest uppercase font-bold text-on-surface">Jana Kyselová</p>
+<div class="w-12 h-px bg-primary"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Emergency Banner -->
+<section class="relative h-[350px] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover brightness-[0.4]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJyK4tsJPNnQtQb8zsQ7Wvb3uzNIo3TGxgOIyKe2RIK7sM1jgxGdcZ0dF4jvMkwj9faKU5IUA2WI_30JLWpkEN_W6VJ7GbwospjCTyl02s-UMvsh5XClbWTmrD1XqXSDb1oilsy4HW_oyQYe_wd8i6ap9SkUlRcbCHh1QoExuKNTcRqD364-GGB98CBcSMOrhrHwyfRLwk9ABXATbgHxLbaI8qfHoIKsHiXWJb8dxWpIsQAIgjI_fZ0DRQilySGv7x2erxPY-dAA"/>
+</div>
+<div class="relative z-10 text-center px-6 reveal reveal-from-bottom">
+<h2 class="font-headline text-4xl md:text-6xl mb-8 text-white">Havárie nečekají.<br/>Já také ne.</h2>
+<div class="flex flex-col md:flex-row gap-6 justify-center">
+<a class="btn-shimmer bg-primary text-on-primary px-8 py-4 font-bold tracking-widest uppercase text-sm hover:scale-105 hover:shadow-2xl transition-all shadow-xl" href="tel:+420732964228">
+                    VOLEJTE: +420 732 964 228
+                </a>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="bg-white py-20 px-6" id="kontakt">
+<div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
+<div class="reveal reveal-from-bottom">
+<h2 class="font-headline text-5xl md:text-6xl mb-10 text-on-surface">Pojďme<br/>začít.</h2>
+<div class="space-y-10">
+<div>
+<p class="text-primary text-xs tracking-widest uppercase mb-3 font-bold">Email</p>
+<a class="contact-link font-headline text-2xl text-on-surface hover:text-primary transition-colors" href="mailto:lukaslangr11@seznam.cz">lukaslangr11@seznam.cz</a>
+</div>
+<div>
+<p class="text-primary text-xs tracking-widest uppercase mb-3 font-bold">Telefon</p>
+<a class="contact-link font-headline text-2xl text-on-surface hover:text-primary transition-colors" href="tel:+420732964228">+420 732 964 228</a>
+</div>
+<div>
+<p class="text-primary text-xs tracking-widest uppercase mb-3 font-bold">Lokalita</p>
+<p class="font-headline text-2xl text-on-surface">Praha &amp; Středočeský kraj</p>
+</div>
+</div>
+</div>
+<form class="space-y-8 reveal reveal-from-bottom" style="transition-delay: 0.2s">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="form-field border-b border-outline-variant/30 pb-4 focus-within:border-primary transition-colors">
+<label class="text-xs text-primary tracking-widest uppercase mb-2 block font-bold">Vaše Jméno</label>
+<input class="w-full bg-transparent border-none p-0 focus:ring-0 text-xl font-headline placeholder:text-outline-variant/50 text-on-surface" placeholder="Vaše jméno..." type="text"/>
+</div>
+<div class="form-field border-b border-outline-variant/30 pb-4 focus-within:border-primary transition-colors">
+<label class="text-xs text-primary tracking-widest uppercase mb-2 block font-bold">E-mail</label>
+<input class="w-full bg-transparent border-none p-0 focus:ring-0 text-xl font-headline placeholder:text-outline-variant/50 text-on-surface" placeholder="email@seznam.cz" type="email"/>
+</div>
+</div>
+<div class="form-field border-b border-outline-variant/30 pb-4 focus-within:border-primary transition-colors">
+<label class="text-xs text-primary tracking-widest uppercase mb-2 block font-bold">Typ Služby</label>
+<select class="w-full bg-transparent border-none p-0 focus:ring-0 text-xl font-headline text-on-surface appearance-none">
+<option class="bg-white">Vodoinstalace</option>
+<option class="bg-white">Vytápění</option>
+<option class="bg-white">Kompletní koupelna</option>
+<option class="bg-white">Jiné</option>
+</select>
+</div>
+<div class="form-field border-b border-outline-variant/30 pb-4 focus-within:border-primary transition-colors">
+<label class="text-xs text-primary tracking-widest uppercase mb-2 block font-bold">Zpráva</label>
+<textarea class="w-full bg-transparent border-none p-0 focus:ring-0 text-xl font-headline placeholder:text-outline-variant/50 text-on-surface" placeholder="S čím mohu pomoci?" rows="3"></textarea>
+</div>
+<button class="btn-shimmer w-full bg-primary text-on-primary py-6 font-bold tracking-[0.2em] uppercase hover:bg-primary/90 hover:shadow-xl transition-all shadow-lg active:scale-95">
+                    ODESLAT DOTAZ
+                </button>
+</form>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="w-full py-16 px-6 md:px-12 flex flex-col md:flex-row justify-between items-start gap-12 bg-surface-container-low border-t border-outline-variant/20">
+<div class="max-w-xs reveal reveal-from-bottom">
+<div class="flex items-center gap-2 mb-4">
+<svg class="w-6 h-6 text-primary" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12,2A10,10,0,0,0,2,12a10,10,0,0,0,10,10,10,10,0,0,0,10-10A10,10,0,0,0,12,2Zm5.5,14.5a1,1,0,0,1-1,1H7.5a1,1,0,0,1-1-1v-2a1,1,0,0,1-1-1h1v-1a4.5,4.5,0,0,1,9,0v1h1a1,1,0,0,1,1,1ZM15,10V9a3,3,0,0,0-6,0v1H9a1,1,0,0,1,1-1,2,2,0,0,1,4,0,1,1,0,0,1,1,1Z"></path>
+</svg>
+<span class="font-headline text-primary italic text-3xl block">LANGR</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+            Poskytuji poctivé instalatérské služby pro klienty, kteří oceňují preciznost a osobní odpovědnost za výsledek.
+        </p>
+</div>
+<div class="text-right reveal reveal-from-bottom">
+<p class="text-xs font-bold tracking-widest text-on-surface-variant uppercase">
+            © 2024 LUKÁŠ LANGR.
+        </p>
+</div>
+</footer>
+<script>
+    // === Reveal: IntersectionObserver (nahrazuje scroll listener) ===
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add("active");
+        });
+    }, { threshold: 0.08, rootMargin: "0px 0px -50px 0px" });
+    document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
+    // === Scroll: progress bar + nav background + aktivní sekce ===
+    const progressBar = document.getElementById("scroll-progress");
+    const nav = document.querySelector("nav");
+    const navLinks = document.querySelectorAll(".nav-link");
+    const sections = document.querySelectorAll("section[id]");
+
+    window.addEventListener("scroll", () => {
+        // Progress bar
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        progressBar.style.width = (window.scrollY / scrollable * 100) + "%";
+
+        // Nav frosted glass zesilení
+        nav.classList.toggle("scrolled", window.scrollY > 60);
+
+        // Zvýraznění aktivního odkazu v nav
+        let current = "";
+        sections.forEach(section => {
+            if (window.scrollY >= section.offsetTop - 160) current = section.id;
+        });
+        navLinks.forEach(link => {
+            link.classList.toggle("is-active", link.getAttribute("href") === "#" + current);
+        });
+    }, { passive: true });
+
+    // === Hamburger / mobilní menu ===
+    const hamburgerBtn = document.getElementById("hamburger-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    hamburgerBtn.addEventListener("click", () => {
+        hamburgerBtn.classList.toggle("open");
+        mobileMenu.classList.toggle("open");
+        document.body.style.overflow = mobileMenu.classList.contains("open") ? "hidden" : "";
+    });
+
+    mobileMenu.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+            hamburgerBtn.classList.remove("open");
+            mobileMenu.classList.remove("open");
+            document.body.style.overflow = "";
+        });
+    });
+
+    // === Animované counterry ve stats sekci ===
+    function animateCounter(el, target, duration) {
+        let startTime = null;
+        const step = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+            el.textContent = Math.round(eased * target);
+            if (progress < 1) requestAnimationFrame(step);
+            else el.textContent = target;
+        };
+        requestAnimationFrame(step);
+    }
+
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const target = parseInt(el.getAttribute("data-target"), 10);
+                animateCounter(el, target, 1800);
+                counterObserver.unobserve(el);
+            }
+        });
+    }, { threshold: 0.6 });
+    document.querySelectorAll(".counter").forEach(el => counterObserver.observe(el));
+</script>
+</body></html>
