@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html class="light" lang="cs">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Moje práce | LANGR – Instalatérské služby</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface-container-highest": "#e4e2df",
+        "on-secondary-container": "#ffffff",
+        "inverse-primary": "#9ecaff",
+        "on-error": "#ffffff",
+        "surface-dim": "#dbdad7",
+        "on-secondary": "#ffffff",
+        "primary": "#1a6fb5",
+        "on-tertiary-container": "#2e1500",
+        "tertiary": "#7f4400",
+        "surface-container-lowest": "#ffffff",
+        "secondary-container": "#c4dcfd",
+        "on-background": "#1b1c1a",
+        "surface-tint": "#1a6fb5",
+        "outline": "#717782",
+        "surface-container-high": "#f5f3f0",
+        "on-primary-container": "#ffffff",
+        "inverse-on-surface": "#f2f0ed",
+        "inverse-surface": "#30312f",
+        "surface-container": "#efeeeb",
+        "on-primary": "#ffffff",
+        "outline-variant": "#c1c7d2",
+        "surface-variant": "#e4e2df",
+        "primary-container": "#1a6fb5",
+        "on-error-container": "#93000a",
+        "background": "#fbf9f6",
+        "on-surface-variant": "#414751",
+        "error": "#ba1a1a",
+        "error-container": "#ffdad6",
+        "surface": "#fbf9f6",
+        "surface-bright": "#fbf9f6",
+        "tertiary-container": "#ffdcc2",
+        "surface-container-low": "#f5f3f0",
+        "on-tertiary": "#ffffff",
+        "secondary": "#49607c",
+        "on-surface": "#1b1c1a",
+      },
+      borderRadius: {
+        DEFAULT: "4px",
+        lg: "4px",
+        xl: "8px",
+        full: "9999px"
+      },
+      fontFamily: {
+        headline: ["Noto Serif"],
+        body: ["Plus Jakarta Sans"],
+        label: ["Plus Jakarta Sans"]
+      }
+    },
+  },
+}
+</script>
+<style>
+/* === Grain overlay === */
+.editorial-grain { position: relative; }
+.editorial-grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuD7is5kos_t8dnJO94x2qXamXnKwtNZ42ZKME-BPxrj3PvxfEUnbL2aBYK62Jf2QS8uFwATGq3Xo70IGEUURPRlSKGJ8hdpAAfwGtde9HQhx4RYAQS4aBD_WtlRNG_waMC1OVDTBuGhO1iRsal5RDv53S2atL4tQMAbePJmudlxVRmKiwurgomI4XGwAyeDnVomOJv-y7_SL85aDJZKhUSkSz7jHpbtQdRtclJ3-IBM5G7oOZIzb89qlX6iVk35I-MamGQtHKzzEw);
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 10;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+
+/* === Scroll progress === */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: #1a6fb5;
+  z-index: 9999;
+  width: 0%;
+  transition: width 0.08s linear;
+}
+
+/* === Nav === */
+nav { transition: background 0.4s ease, box-shadow 0.4s ease; }
+nav.scrolled {
+  background: rgba(255,255,255,0.98) !important;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.07);
+}
+
+.nav-link { position: relative; }
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: #1a6fb5;
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav-link:hover::after { width: 100%; }
+
+/* === Hamburger === */
+.hamburger-line {
+  display: block;
+  width: 22px; height: 1.5px;
+  background: #1a6fb5;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+#hamburger-btn.open .hamburger-line:nth-child(1) { transform: translateY(4.75px) rotate(45deg); }
+#hamburger-btn.open .hamburger-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+#hamburger-btn.open .hamburger-line:nth-child(3) { transform: translateY(-4.75px) rotate(-45deg); }
+
+#mobile-menu {
+  transform: translateX(100%);
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#mobile-menu.open { transform: translateX(0); }
+
+/* === Shimmer === */
+.btn-shimmer { position: relative; overflow: hidden; }
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -80%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.65s ease;
+}
+.btn-shimmer:hover::after { left: 150%; }
+
+/* === Reveal === */
+.reveal {
+  opacity: 0;
+  transition: all 0.8s ease-out;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-from-bottom { transform: translateY(30px); }
+
+/* === Filter pills === */
+.filter-pill {
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  user-select: none;
+}
+.filter-pill:hover {
+  color: #1a6fb5;
+  border-color: #1a6fb5;
+}
+.filter-pill.active {
+  background: #1a6fb5;
+  color: white;
+  border-color: #1a6fb5;
+}
+
+/* === Gallery grid === */
+.gallery-grid {
+  columns: 1;
+  column-gap: 16px;
+}
+@media (min-width: 640px) {
+  .gallery-grid { columns: 2; }
+}
+@media (min-width: 1024px) {
+  .gallery-grid { columns: 3; }
+}
+@media (min-width: 1400px) {
+  .gallery-grid { columns: 4; }
+}
+
+/* === Gallery items === */
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.gallery-item.hiding {
+  opacity: 0;
+  transform: scale(0.92);
+}
+.gallery-item img {
+  width: 100%;
+  display: block;
+  filter: grayscale(80%) contrast(1.05);
+  transition: filter 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.gallery-item:hover img {
+  filter: grayscale(0%) contrast(1);
+  transform: scale(1.05);
+}
+
+/* === Gallery overlay === */
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(26,111,181,0.88) 0%, rgba(26,111,181,0.2) 40%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-overlay h4 {
+  transform: translateY(12px);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.gallery-item:hover .gallery-overlay h4 { transform: translateY(0); }
+.gallery-overlay .tag-pill {
+  transform: translateY(8px);
+  opacity: 0;
+  transition: transform 0.4s ease 0.05s, opacity 0.3s ease 0.05s;
+}
+.gallery-item:hover .gallery-overlay .tag-pill {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* === Lightbox === */
+#lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+#lightbox.open {
+  opacity: 1;
+  pointer-events: all;
+}
+#lightbox img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 4px;
+  transform: scale(0.9);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+}
+#lightbox.open img { transform: scale(1); }
+#lightbox-caption {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  opacity: 0;
+  transition: all 0.4s ease 0.15s;
+  text-align: center;
+}
+#lightbox.open #lightbox-caption {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+.lb-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+}
+.lb-nav:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-50%) scale(1.1);
+}
+#lb-prev { left: 16px; }
+#lb-next { right: 16px; }
+#lb-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+  z-index: 10;
+}
+#lb-close:hover { background: rgba(255,255,255,0.12); }
+#lb-counter {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  color: rgba(255,255,255,0.5);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+}
+
+/* === Custom scrollbar === */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #fbf9f6; }
+::-webkit-scrollbar-thumb { background: #1a6fb5; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #00497d; }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary">
+
+<div id="scroll-progress"></div>
+
+<!-- Nav -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-12 py-4 max-w-[1920px] mx-auto bg-white/80 backdrop-blur-xl border-b border-outline-variant/10">
+  <div class="flex items-center gap-2">
+    <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M12,2A10,10,0,0,0,2,12a10,10,0,0,0,10,10,10,10,0,0,0,10-10A10,10,0,0,0,12,2Zm5.5,14.5a1,1,0,0,1-1,1H7.5a1,1,0,0,1-1-1v-2a1,1,0,0,1-1-1h1v-1a4.5,4.5,0,0,1,9,0v1h1a1,1,0,0,1,1,1ZM15,10V9a3,3,0,0,0-6,0v1H9a1,1,0,0,1,1-1,2,2,0,0,1,4,0,1,1,0,0,1,1,1Z"/>
+    </svg>
+    <a href="index.html" class="text-3xl font-bold font-headline text-primary tracking-tighter">LANGR</a>
+    <span class="ml-4 text-[10px] tracking-[0.2em] uppercase text-on-surface-variant/60 font-sans font-bold border-l border-outline-variant/30 pl-4 py-1 hidden sm:block">Když to teče, víme proč</span>
+  </div>
+  <div class="hidden md:flex items-center gap-10">
+    <a class="nav-link tracking-widest uppercase text-xs font-sans text-on-surface-variant hover:text-primary transition-colors duration-300" href="index.html#sluzby">S čím pomůžu</a>
+    <a class="nav-link tracking-widest uppercase text-xs font-sans text-on-surface-variant hover:text-primary transition-colors duration-300" href="index.html#kdo-jsem">Kdo jsem</a>
+    <a class="nav-link tracking-widest uppercase text-xs font-sans text-on-surface-variant hover:text-primary transition-colors duration-300 is-active" href="galerie.html">Moje práce</a>
+    <a class="nav-link tracking-widest uppercase text-xs font-sans text-on-surface-variant hover:text-primary transition-colors duration-300" href="index.html#kontakt">Kontakt</a>
+  </div>
+  <div class="flex items-center gap-4">
+    <a class="hidden md:inline-block btn-shimmer bg-primary text-on-primary px-6 py-2.5 tracking-widest uppercase text-xs font-bold hover:bg-primary/90 hover:shadow-lg transition-all duration-300 active:scale-95 text-center" href="index.html#kontakt">POPTAT PRÁCI</a>
+    <button id="hamburger-btn" class="md:hidden flex flex-col gap-[5px] p-2 cursor-pointer" aria-label="Otevřít menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mobile-menu" class="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-10 md:hidden">
+  <a class="font-headline text-4xl text-on-surface hover:text-primary transition-colors pb-1" href="index.html#sluzby">S čím pomůžu</a>
+  <a class="font-headline text-4xl text-on-surface hover:text-primary transition-colors pb-1" href="index.html#kdo-jsem">Kdo jsem</a>
+  <a class="font-headline text-4xl text-primary transition-colors pb-1" href="galerie.html">Moje práce</a>
+  <a class="font-headline text-4xl text-on-surface hover:text-primary transition-colors pb-1" href="index.html#kontakt">Kontakt</a>
+  <a class="btn-shimmer mt-4 bg-primary text-on-primary px-10 py-4 text-sm tracking-widest uppercase font-bold hover:bg-primary/90 transition-all active:scale-95" href="index.html#kontakt">POPTAT PRÁCI</a>
+</div>
+
+<main class="editorial-grain">
+
+  <!-- Hero -->
+  <section class="pt-32 pb-16 md:pt-40 md:pb-20 px-6 md:px-12 relative overflow-hidden">
+    <div class="max-w-[1600px] mx-auto reveal reveal-from-bottom active">
+      <p class="text-primary text-xs tracking-[0.4em] uppercase mb-4 font-bold">Portfolio</p>
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <h1 class="font-headline text-5xl md:text-7xl lg:text-8xl text-on-surface leading-[0.95]">
+          Ukázky<br/><span class="italic font-normal text-primary">mé práce</span>
+        </h1>
+        <p class="max-w-md text-on-surface-variant text-base md:text-lg leading-relaxed md:pb-2">
+          Každá fotografie je důkazem práce, za kterou ručím svým jménem.
+        </p>
+      </div>
+      <div class="hairline-x w-full mt-10 bg-outline-variant/20" style="height:1px"></div>
+    </div>
+  </section>
+
+  <!-- Filters + Gallery -->
+  <section class="px-6 md:px-12 pb-24">
+    <div class="max-w-[1600px] mx-auto">
+
+      <!-- Filter pills -->
+      <div class="flex flex-wrap gap-3 mb-12 reveal reveal-from-bottom active" id="filters">
+        <button class="filter-pill active px-5 py-2.5 text-xs tracking-[0.2em] uppercase font-bold border border-outline-variant/30 rounded-full" data-filter="all">Vše</button>
+        <button class="filter-pill px-5 py-2.5 text-xs tracking-[0.2em] uppercase font-bold border border-outline-variant/30 text-on-surface-variant rounded-full" data-filter="voda">Vodoinstalace</button>
+        <button class="filter-pill px-5 py-2.5 text-xs tracking-[0.2em] uppercase font-bold border border-outline-variant/30 text-on-surface-variant rounded-full" data-filter="topeni">Vytápění</button>
+        <button class="filter-pill px-5 py-2.5 text-xs tracking-[0.2em] uppercase font-bold border border-outline-variant/30 text-on-surface-variant rounded-full" data-filter="plyn">Plyn</button>
+        <button class="filter-pill px-5 py-2.5 text-xs tracking-[0.2em] uppercase font-bold border border-outline-variant/30 text-on-surface-variant rounded-full" data-filter="koupelna">Koupelny</button>
+        <button class="filter-pill px-5 py-2.5 text-xs tracking-[0.2em] uppercase font-bold border border-outline-variant/30 text-on-surface-variant rounded-full" data-filter="detail">Detaily</button>
+      </div>
+
+      <!-- Masonry gallery -->
+      <div class="gallery-grid" id="gallery">
+
+        <!-- 1 -->
+        <div class="gallery-item" data-cat="voda" data-title="Měděné rozvody – novostavba Praha 6" data-idx="0">
+          <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&h=800&fit=crop" alt="Měděné rozvody" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vodoinstalace</span>
+            <h4 class="font-headline text-white text-lg">Měděné rozvody – novostavba</h4>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="gallery-item" data-cat="koupelna" data-title="Minimalistická koupelna v rezidenci Vinohrady" data-idx="1">
+          <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&h=750&fit=crop" alt="Koupelna Vinohrady" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Koupelna</span>
+            <h4 class="font-headline text-white text-lg">Minimalistická koupelna Vinohrady</h4>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="gallery-item" data-cat="topeni" data-title="Podlahové vytápění – rodinný dům Říčany" data-idx="2">
+          <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&h=600&fit=crop" alt="Podlahové vytápění" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
+            <h4 class="font-headline text-white text-lg">Podlahové vytápění Říčany</h4>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="gallery-item" data-cat="detail" data-title="Profesionální nářadí a příprava" data-idx="3">
+          <img src="https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=600&h=900&fit=crop" alt="Nářadí" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Detail</span>
+            <h4 class="font-headline text-white text-lg">Profesionální nářadí</h4>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="gallery-item" data-cat="koupelna" data-title="Sprchový kout s italskou mozaikou" data-idx="4">
+          <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&h=800&fit=crop" alt="Sprchový kout" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Koupelna</span>
+            <h4 class="font-headline text-white text-lg">Sprchový kout – italská mozaika</h4>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="gallery-item" data-cat="plyn" data-title="Kondenzační kotel Viessmann – instalace" data-idx="5">
+          <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&h=700&fit=crop" alt="Kondenzační kotel" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Plyn</span>
+            <h4 class="font-headline text-white text-lg">Kondenzační kotel Viessmann</h4>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="gallery-item" data-cat="voda" data-title="Rozvodná stanice teplé vody" data-idx="6">
+          <img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=600&h=600&fit=crop" alt="Rozvodná stanice" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vodoinstalace</span>
+            <h4 class="font-headline text-white text-lg">Rozvodná stanice teplé vody</h4>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="gallery-item" data-cat="koupelna" data-title="Mramorová koupelna – privátní byt Smíchov" data-idx="7">
+          <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&h=850&fit=crop" alt="Mramorová koupelna" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Koupelna</span>
+            <h4 class="font-headline text-white text-lg">Mramorová koupelna Smíchov</h4>
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="gallery-item" data-cat="topeni" data-title="Tepelné čerpadlo vzduch-voda" data-idx="8">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=700&fit=crop" alt="Tepelné čerpadlo" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
+            <h4 class="font-headline text-white text-lg">Tepelné čerpadlo vzduch-voda</h4>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="gallery-item" data-cat="detail" data-title="Precizní pájený spoj na mědi" data-idx="9">
+          <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebb6525?w=600&h=600&fit=crop" alt="Pájený spoj" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Detail</span>
+            <h4 class="font-headline text-white text-lg">Precizní pájený spoj na mědi</h4>
+          </div>
+        </div>
+
+        <!-- 11 -->
+        <div class="gallery-item" data-cat="voda" data-title="Vodoměrná sestava – komerční objekt" data-idx="10">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=500&fit=crop" alt="Vodoměrná sestava" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vodoinstalace</span>
+            <h4 class="font-headline text-white text-lg">Vodoměrná sestava</h4>
+          </div>
+        </div>
+
+        <!-- 12 -->
+        <div class="gallery-item" data-cat="koupelna" data-title="Volně stojící vana Duravit" data-idx="11">
+          <img src="https://images.unsplash.com/photo-1600566752229-250ed79470f8?w=600&h=750&fit=crop" alt="Vana Duravit" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Koupelna</span>
+            <h4 class="font-headline text-white text-lg">Volně stojící vana Duravit</h4>
+          </div>
+        </div>
+
+        <!-- 13 -->
+        <div class="gallery-item" data-cat="topeni" data-title="Radiátorové těleso – historický byt" data-idx="12">
+          <img src="https://images.unsplash.com/photo-1631545806609-45e8060f0a68?w=600&h=800&fit=crop" alt="Radiátor" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
+            <h4 class="font-headline text-white text-lg">Radiátorové těleso – historický byt</h4>
+          </div>
+        </div>
+
+        <!-- 14 -->
+        <div class="gallery-item" data-cat="plyn" data-title="Plynová přípojka – revize a montáž" data-idx="13">
+          <img src="https://images.unsplash.com/photo-1621905252472-30e1d8bf2e84?w=600&h=650&fit=crop" alt="Plynová přípojka" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Plyn</span>
+            <h4 class="font-headline text-white text-lg">Plynová přípojka – revize</h4>
+          </div>
+        </div>
+
+        <!-- 15 -->
+        <div class="gallery-item" data-cat="detail" data-title="Chromové ventily – designová armatura" data-idx="14">
+          <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&h=550&fit=crop" alt="Chromové ventily" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Detail</span>
+            <h4 class="font-headline text-white text-lg">Chromové ventily – designová armatura</h4>
+          </div>
+        </div>
+
+        <!-- 16 -->
+        <div class="gallery-item" data-cat="koupelna" data-title="WC s podomítkovým systémem Geberit" data-idx="15">
+          <img src="https://images.unsplash.com/photo-1564540586988-aa4e53c3d799?w=600&h=800&fit=crop" alt="WC Geberit" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Koupelna</span>
+            <h4 class="font-headline text-white text-lg">WC – podomítkový Geberit</h4>
+          </div>
+        </div>
+
+        <!-- 17 -->
+        <div class="gallery-item" data-cat="voda" data-title="PPR rozvody studené a teplé vody" data-idx="16">
+          <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&h=700&fit=crop" alt="PPR rozvody" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vodoinstalace</span>
+            <h4 class="font-headline text-white text-lg">PPR rozvody studené a teplé vody</h4>
+          </div>
+        </div>
+
+        <!-- 18 -->
+        <div class="gallery-item" data-cat="topeni" data-title="Rozdělovač podlahového topení" data-idx="17">
+          <img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=600&h=850&fit=crop" alt="Rozdělovač" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
+            <h4 class="font-headline text-white text-lg">Rozdělovač podlahového topení</h4>
+          </div>
+        </div>
+
+        <!-- 19 -->
+        <div class="gallery-item" data-cat="koupelna" data-title="Obklad velkoformátový – walk-in sprcha" data-idx="18">
+          <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&h=750&fit=crop" alt="Walk-in sprcha" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Koupelna</span>
+            <h4 class="font-headline text-white text-lg">Walk-in sprcha – velkoformát</h4>
+          </div>
+        </div>
+
+        <!-- 20 -->
+        <div class="gallery-item" data-cat="detail" data-title="Měření a projekt – příprava realizace" data-idx="19">
+          <img src="https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=600&h=600&fit=crop" alt="Měření" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Detail</span>
+            <h4 class="font-headline text-white text-lg">Měření a projekt – příprava</h4>
+          </div>
+        </div>
+
+        <!-- 21 -->
+        <div class="gallery-item" data-cat="plyn" data-title="Plynový rozvod – bytový dům Holešovice" data-idx="20">
+          <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&h=600&fit=crop" alt="Plynový rozvod" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Plyn</span>
+            <h4 class="font-headline text-white text-lg">Plynový rozvod Holešovice</h4>
+          </div>
+        </div>
+
+        <!-- 22 -->
+        <div class="gallery-item" data-cat="voda" data-title="Filtrační systém celého domu" data-idx="21">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=800&fit=crop" alt="Filtrační systém" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vodoinstalace</span>
+            <h4 class="font-headline text-white text-lg">Filtrační systém celého domu</h4>
+          </div>
+        </div>
+
+        <!-- 23 -->
+        <div class="gallery-item" data-cat="koupelna" data-title="Dvojumyvadlo s podsvícením" data-idx="22">
+          <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&h=650&fit=crop" alt="Dvojumyvadlo" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Koupelna</span>
+            <h4 class="font-headline text-white text-lg">Dvojumyvadlo s podsvícením</h4>
+          </div>
+        </div>
+
+        <!-- 24 -->
+        <div class="gallery-item" data-cat="topeni" data-title="Kotelna – kompletní realizace" data-idx="23">
+          <img src="https://images.unsplash.com/photo-1631545806609-45e8060f0a68?w=600&h=700&fit=crop" alt="Kotelna" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
+            <h4 class="font-headline text-white text-lg">Kotelna – kompletní realizace</h4>
+          </div>
+        </div>
+
+      </div>
+
+      
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-primary py-16 px-6 text-center">
+    <div class="max-w-2xl mx-auto reveal reveal-from-bottom">
+      <h2 class="font-headline text-3xl md:text-5xl text-white mb-6">Líbí se vám moje práce?</h2>
+      <p class="text-white/70 text-lg mb-10">Neváhejte se na mě obrátit</p>
+      <a class="btn-shimmer inline-block bg-white text-primary px-10 py-5 font-bold tracking-[0.2em] uppercase hover:bg-white/90 hover:shadow-xl transition-all shadow-lg active:scale-95" href="index.html#kontakt">POPTAT REALIZACI</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <div id="lb-close"><span class="material-symbols-outlined text-3xl">close</span></div>
+  <div id="lb-prev" class="lb-nav"><span class="material-symbols-outlined text-3xl">chevron_left</span></div>
+  <div id="lb-next" class="lb-nav"><span class="material-symbols-outlined text-3xl">chevron_right</span></div>
+  <img id="lb-img" src="" alt=""/>
+  <div id="lb-caption">
+    <p class="font-headline text-white text-xl md:text-2xl mb-1" id="lb-title"></p>
+    <p class="text-white/50 text-xs tracking-[0.2em] uppercase" id="lb-tag"></p>
+  </div>
+  <div id="lb-counter"></div>
+</div>
+
+<!-- Footer -->
+<footer class="w-full py-16 px-6 md:px-12 flex flex-col md:flex-row justify-between items-start gap-12 bg-surface-container-low border-t border-outline-variant/20">
+  <div class="max-w-xs">
+    <div class="flex items-center gap-2 mb-4">
+      <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12,2A10,10,0,0,0,2,12a10,10,0,0,0,10,10,10,10,0,0,0,10-10A10,10,0,0,0,12,2Zm5.5,14.5a1,1,0,0,1-1,1H7.5a1,1,0,0,1-1-1v-2a1,1,0,0,1-1-1h1v-1a4.5,4.5,0,0,1,9,0v1h1a1,1,0,0,1,1,1ZM15,10V9a3,3,0,0,0-6,0v1H9a1,1,0,0,1,1-1,2,2,0,0,1,4,0,1,1,0,0,1,1,1Z"/>
+      </svg>
+      <span class="font-headline text-primary italic text-3xl block">LANGR</span>
+    </div>
+    <p class="text-sm text-on-surface-variant leading-relaxed">
+      Poskytuji poctivé instalatérské služby pro klienty, kteří oceňují preciznost a osobní odpovědnost za výsledek.
+    </p>
+  </div>
+  <div class="text-right">
+    <p class="text-xs font-bold tracking-widest text-on-surface-variant uppercase">© 2024 LUKÁŠ LANGR.</p>
+  </div>
+</footer>
+
+<script>
+// === Reveal ===
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("active"); });
+}, { threshold: 0.08, rootMargin: "0px 0px -50px 0px" });
+document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
+// === Scroll progress + nav ===
+const progressBar = document.getElementById("scroll-progress");
+const nav = document.querySelector("nav");
+window.addEventListener("scroll", () => {
+  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = (window.scrollY / scrollable * 100) + "%";
+  nav.classList.toggle("scrolled", window.scrollY > 60);
+}, { passive: true });
+
+// === Hamburger ===
+const hamburgerBtn = document.getElementById("hamburger-btn");
+const mobileMenu = document.getElementById("mobile-menu");
+hamburgerBtn.addEventListener("click", () => {
+  hamburgerBtn.classList.toggle("open");
+  mobileMenu.classList.toggle("open");
+  document.body.style.overflow = mobileMenu.classList.contains("open") ? "hidden" : "";
+});
+mobileMenu.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    hamburgerBtn.classList.remove("open");
+    mobileMenu.classList.remove("open");
+    document.body.style.overflow = "";
+  });
+});
+
+// === Filter ===
+const pills = document.querySelectorAll(".filter-pill");
+const items = document.querySelectorAll(".gallery-item");
+const countEl = document.getElementById("gallery-count");
+
+pills.forEach(pill => {
+  pill.addEventListener("click", () => {
+    pills.forEach(p => p.classList.remove("active"));
+    pill.classList.add("active");
+    const filter = pill.dataset.filter;
+    let visible = 0;
+
+    items.forEach(item => {
+      const match = filter === "all" || item.dataset.cat === filter;
+      if (!match) {
+        item.classList.add("hiding");
+        setTimeout(() => { item.style.display = "none"; }, 400);
+      } else {
+        item.style.display = "";
+        setTimeout(() => { item.classList.remove("hiding"); }, 30);
+        visible++;
+      }
+    });
+
+    countEl.textContent = visible + " realizací";
+  });
+});
+
+// === Lightbox ===
+const lightbox = document.getElementById("lightbox");
+const lbImg = document.getElementById("lb-img");
+const lbTitle = document.getElementById("lb-title");
+const lbTag = document.getElementById("lb-tag");
+const lbCounter = document.getElementById("lb-counter");
+let currentIdx = 0;
+let visibleItems = [];
+
+function getVisibleItems() {
+  return [...document.querySelectorAll(".gallery-item")].filter(i => i.style.display !== "none");
+}
+
+function openLightbox(idx) {
+  visibleItems = getVisibleItems();
+  currentIdx = idx;
+  showSlide();
+  lightbox.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function showSlide() {
+  const item = visibleItems[currentIdx];
+  if (!item) return;
+  const img = item.querySelector("img");
+  // Load full-res version
+  const src = img.src.replace(/w=\d+/, "w=1400").replace(/h=\d+/, "h=1400");
+  lbImg.src = src;
+  lbTitle.textContent = item.dataset.title;
+  const tagEl = item.querySelector(".tag-pill");
+  lbTag.textContent = tagEl ? tagEl.textContent : "";
+  lbCounter.textContent = (currentIdx + 1) + " / " + visibleItems.length;
+}
+
+function closeLightbox() {
+  lightbox.classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+items.forEach(item => {
+  item.addEventListener("click", () => {
+    visibleItems = getVisibleItems();
+    const idx = visibleItems.indexOf(item);
+    if (idx >= 0) openLightbox(idx);
+  });
+});
+
+document.getElementById("lb-close").addEventListener("click", closeLightbox);
+lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLightbox(); });
+
+document.getElementById("lb-prev").addEventListener("click", (e) => {
+  e.stopPropagation();
+  currentIdx = (currentIdx - 1 + visibleItems.length) % visibleItems.length;
+  showSlide();
+});
+document.getElementById("lb-next").addEventListener("click", (e) => {
+  e.stopPropagation();
+  currentIdx = (currentIdx + 1) % visibleItems.length;
+  showSlide();
+});
+
+// Keyboard nav
+document.addEventListener("keydown", e => {
+  if (!lightbox.classList.contains("open")) return;
+  if (e.key === "Escape") closeLightbox();
+  if (e.key === "ArrowLeft") { currentIdx = (currentIdx - 1 + visibleItems.length) % visibleItems.length; showSlide(); }
+  if (e.key === "ArrowRight") { currentIdx = (currentIdx + 1) % visibleItems.length; showSlide(); }
+});
+</script>
+</body>
+</html>
