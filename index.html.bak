@@ -438,10 +438,7 @@
 <div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
 <div class="space-y-8 reveal reveal-from-bottom" style="transition-delay: 0.1s">
 <div class="portfolio-item group overflow-hidden bg-surface-container-low shadow-sm hover:shadow-xl transition-all duration-500">
-<picture>
-  <source srcset="img/thumbs/voda-01.webp" type="image/webp"/>
-  <img class="w-full aspect-[4/5] object-cover grayscale" src="img/thumbs/voda-01.jpg" alt="Měděné a PPR rozvody v technické místnosti" loading="eager"/>
-</picture>
+<img class="w-full aspect-[4/5] object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbmN2HuwOeIiKBfPtmzFs1KT6m8aFfuRjyNpK5jaMktdy4M6pPkNn5dLDWrF6hgXTnTQJECybiRJzq-uHY2V4RSRTtTJagWLVyfaF-FzvzFadllRohFrBd9tMmFo2F_-mmGTdM1DwAQlyDrLucj47LHB8Ld_amBbW_vheLFMaVBnNMTV1unWAUcvSGg0tvnoyXYNqRV_oLK6afFLodjYWEwbmQGffIMxRZdV7I5ZbuR91kB1xndHRAbFBsMQzRxZUNSVyfVw9E1w"/>
 <div class="p-6">
 <p class="text-xs text-primary uppercase tracking-widest mb-2 font-bold">Technika</p>
 <h4 class="font-headline text-xl text-on-surface">Měděné rozvodné systémy</h4>
@@ -451,10 +448,7 @@
 </div>
 <div class="space-y-8 md:pt-20 reveal reveal-from-bottom" style="transition-delay: 0.2s">
 <div class="portfolio-item group overflow-hidden bg-surface-container-low shadow-sm hover:shadow-xl transition-all duration-500">
-<picture>
-  <source srcset="img/thumbs/koupelna-02.webp" type="image/webp"/>
-  <img class="w-full aspect-square object-cover grayscale" src="img/thumbs/koupelna-02.jpg" alt="Kompletní koupelna s umyvadlem a závěsným WC" loading="eager"/>
-</picture>
+<img class="w-full aspect-square object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLS7bmQVkHq9OIFkOHtSfNTMHHOocEjYrVXplRPmX0K1n-3cBRDX8hTSCfr4qGsK88KRVY9JiF2mHLdJOiBrY5sQTj3zFT8Hay70LULvW1UC_dwIn4xTebxazvsQv441TKaUV4uwYgl0RdDVezyBFPszR2N0wN1B7oSvhuHpvsui6UVmGOdFa5T-n5w_ztDZle7DlD5eCEzTqf8L-wCY7PyYOkF6dg_RFEs0LFxcpObz5w9Q5gfKuaUMv_5n-VXjNPdD63TG2Xzw"/>
 <div class="p-6">
 <p class="text-xs text-primary uppercase tracking-widest mb-2 font-bold">Design</p>
 <h4 class="font-headline text-xl text-on-surface">Koupelna v soukromé rezidenci</h4>
@@ -462,10 +456,7 @@
 </div>
 </div>
 <div class="portfolio-item group overflow-hidden bg-surface-container-low shadow-sm hover:shadow-xl transition-all duration-500">
-<picture>
-  <source srcset="img/thumbs/topeni-08.webp" type="image/webp"/>
-  <img class="w-full aspect-[3/4] object-cover grayscale" src="img/thumbs/topeni-08.jpg" alt="Dvojkotel Buderus s měděnými rozvody" loading="lazy"/>
-</picture>
+<img class="w-full aspect-[3/4] object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0UXMjKa0gWThy44q-2zo8SoKTZFY9QeEMntxjhRWRwNcrmZiUdZnrtMsiW_X5ssGLflpIQdyu9kW-7iGXY5ZxOOCaekVgx6Z8xqSV5R8CjaizGS0ENc68atX2rMSO4lsnmrh6PO_mZEF0EZOZvevfwrIG-NB9kmfn_piMdnWZPHMjRxI4_4jXkc7G95NEJanxx4jivXc-v0INAPEGJ7SYMn68Aend0009eOe_DL1LWW2ho1Wi-GGuX0LCqoXM1gfht1fVZ0ywbQ"/>
 <div class="p-6">
 <p class="text-xs text-primary uppercase tracking-widest mb-2 font-bold">Technika</p>
 <h4 class="font-headline text-xl text-on-surface">Centrální topný uzel</h4>
@@ -475,10 +466,7 @@
 </div>
 <div class="space-y-8 reveal reveal-from-bottom" style="transition-delay: 0.3s">
 <div class="portfolio-item group overflow-hidden bg-surface-container-low shadow-sm hover:shadow-xl transition-all duration-500">
-<picture>
-  <source srcset="img/thumbs/topeni-03.webp" type="image/webp"/>
-  <img class="w-full aspect-[4/5] object-cover grayscale" src="img/thumbs/topeni-03.jpg" alt="Podlahové topení – červené trubky na termoizolaci" loading="lazy"/>
-</picture>
+<img class="w-full aspect-[4/5] object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAGmMnqxAFODlFPALW2roDXUjPFYLDba7tFdI63K8RDlMsIkXQpt9cUHyQx1Fa0X8_GobCfGKi-KL1KumWCIO9ISByXfJ3HwaGdZ8pWr7J_sPnCy0PNxd2Y6pYQ6kG5bvy9oZ0EUy3e0Kyxog7P_D3FGAkqB_jiUzcaogi-LPU9ueNHOO4QgVAE6rFR5NUS4tzjqMumsppEZpV1gBXmC5j6WH430HDrArQiX9iQrC9aqZsFkbU2uQBU1ST0eSXsz0uD6llGLvWfQ"/>
 <div class="p-6">
 <p class="text-xs text-primary uppercase tracking-widest mb-2 font-bold">Řemeslo</p>
 <h4 class="font-headline text-xl text-on-surface">Nástroje mistra svého oboru</h4>

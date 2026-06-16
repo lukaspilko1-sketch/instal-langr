@@ -389,416 +389,237 @@ nav.scrolled {
     <div class="max-w-[1600px] mx-auto">
 
       <!-- Filter pills -->
-      <div class="flex flex-wrap gap-3 mb-6 reveal reveal-from-bottom active" id="filters">
+      <div class="flex flex-wrap gap-3 mb-12 reveal reveal-from-bottom active" id="filters">
         <button class="filter-pill active px-5 py-2.5 text-xs tracking-[0.2em] uppercase font-bold border border-outline-variant/30 rounded-full" data-filter="all">Vše</button>
-        <button class="filter-pill px-5 py-2.5 text-xs tracking-[0.2em] uppercase font-bold border border-outline-variant/30 text-on-surface-variant rounded-full" data-filter="topeni">Vytápění</button>
         <button class="filter-pill px-5 py-2.5 text-xs tracking-[0.2em] uppercase font-bold border border-outline-variant/30 text-on-surface-variant rounded-full" data-filter="voda">Vodoinstalace</button>
+        <button class="filter-pill px-5 py-2.5 text-xs tracking-[0.2em] uppercase font-bold border border-outline-variant/30 text-on-surface-variant rounded-full" data-filter="topeni">Vytápění</button>
+        <button class="filter-pill px-5 py-2.5 text-xs tracking-[0.2em] uppercase font-bold border border-outline-variant/30 text-on-surface-variant rounded-full" data-filter="plyn">Plyn</button>
         <button class="filter-pill px-5 py-2.5 text-xs tracking-[0.2em] uppercase font-bold border border-outline-variant/30 text-on-surface-variant rounded-full" data-filter="koupelna">Koupelny</button>
-        <button class="filter-pill px-5 py-2.5 text-xs tracking-[0.2em] uppercase font-bold border border-outline-variant/30 text-on-surface-variant rounded-full" data-filter="ostatni">Ostatní</button>
+        <button class="filter-pill px-5 py-2.5 text-xs tracking-[0.2em] uppercase font-bold border border-outline-variant/30 text-on-surface-variant rounded-full" data-filter="detail">Detaily</button>
       </div>
-      
 
       <!-- Masonry gallery -->
       <div class="gallery-grid" id="gallery">
 
-        <div class="gallery-item" data-cat="topeni" data-title="Dvojkotel Buderus s medenymi rozvody" data-idx="0">
-          <picture>
-            <source srcset="img/thumbs/topeni-08.webp" type="image/webp"/>
-            <img src="img/thumbs/topeni-08.jpg" alt="Dvojkotel Buderus s měděnými rozvody" loading="eager" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
-            <h4 class="font-headline text-white text-lg">Dvojkotel Buderus s měděnými rozvody</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="koupelna" data-title="Sprchovy kout - celkovy pohled na realizaci" data-idx="1">
-          <picture>
-            <source srcset="img/thumbs/koupelna-03.webp" type="image/webp"/>
-            <img src="img/thumbs/koupelna-03.jpg" alt="Sprchový kout – celkový pohled na realizaci" loading="eager" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Koupelna</span>
-            <h4 class="font-headline text-white text-lg">Sprchový kout – celkový pohled</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="voda" data-title="Ponorne cerpadlo Grundfos v betonove sachte" data-idx="2">
-          <picture>
-            <source srcset="img/thumbs/voda-02.webp" type="image/webp"/>
-            <img src="img/thumbs/voda-02.jpg" alt="Ponorné čerpadlo Grundfos v betonové šachtě" loading="eager" class="w-full"/>
-          </picture>
+        <!-- 1 -->
+        <div class="gallery-item" data-cat="voda" data-title="Měděné rozvody – novostavba Praha 6" data-idx="0">
+          <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&h=800&fit=crop" alt="Měděné rozvody" loading="lazy"/>
           <div class="gallery-overlay">
             <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vodoinstalace</span>
-            <h4 class="font-headline text-white text-lg">Ponorné čerpadlo Grundfos</h4>
+            <h4 class="font-headline text-white text-lg">Měděné rozvody – novostavba</h4>
           </div>
         </div>
 
-        <div class="gallery-item" data-cat="topeni" data-title="Podlahove topeni - cervene trubky na termoizolaci" data-idx="3">
-          <picture>
-            <source srcset="img/thumbs/topeni-03.webp" type="image/webp"/>
-            <img src="img/thumbs/topeni-03.jpg" alt="Podlahové topení – červené trubky na termoizolaci" loading="eager" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
-            <h4 class="font-headline text-white text-lg">Podlahové topení – červené trubky</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="topeni" data-title="Podlahove topeni - panorama velke mistnosti" data-idx="4">
-          <picture>
-            <source srcset="img/thumbs/topeni-05.webp" type="image/webp"/>
-            <img src="img/thumbs/topeni-05.jpg" alt="Podlahové topení – panorama velké místnosti" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
-            <h4 class="font-headline text-white text-lg">Podlahové topení – panorama</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="koupelna" data-title="Sprchovy kout s designovymi obklady" data-idx="5">
-          <picture>
-            <source srcset="img/thumbs/koupelna-01.webp" type="image/webp"/>
-            <img src="img/thumbs/koupelna-01.jpg" alt="Sprchový kout s designovými obklady" loading="lazy" class="w-full"/>
-          </picture>
+        <!-- 2 -->
+        <div class="gallery-item" data-cat="koupelna" data-title="Minimalistická koupelna v rezidenci Vinohrady" data-idx="1">
+          <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&h=750&fit=crop" alt="Koupelna Vinohrady" loading="lazy"/>
           <div class="gallery-overlay">
             <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Koupelna</span>
-            <h4 class="font-headline text-white text-lg">Sprchový kout s designovými obklady</h4>
+            <h4 class="font-headline text-white text-lg">Minimalistická koupelna Vinohrady</h4>
           </div>
         </div>
 
-        <div class="gallery-item" data-cat="voda" data-title="Medene a PPR rozvody v technicke mistnosti" data-idx="6">
-          <picture>
-            <source srcset="img/thumbs/voda-01.webp" type="image/webp"/>
-            <img src="img/thumbs/voda-01.jpg" alt="Měděné a PPR rozvody v technické místnosti" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vodoinstalace</span>
-            <h4 class="font-headline text-white text-lg">Měděné a PPR rozvody</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="topeni" data-title="Kotelna s izolovanym potrubim a rozdelovacem" data-idx="7">
-          <picture>
-            <source srcset="img/thumbs/topeni-06.webp" type="image/webp"/>
-            <img src="img/thumbs/topeni-06.jpg" alt="Kotelna s izolovaným potrubím a rozdělovačem" loading="lazy" class="w-full"/>
-          </picture>
+        <!-- 3 -->
+        <div class="gallery-item" data-cat="topeni" data-title="Podlahové vytápění – rodinný dům Říčany" data-idx="2">
+          <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&h=600&fit=crop" alt="Podlahové vytápění" loading="lazy"/>
           <div class="gallery-overlay">
             <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
-            <h4 class="font-headline text-white text-lg">Kotelna – izolované potrubí</h4>
+            <h4 class="font-headline text-white text-lg">Podlahové vytápění Říčany</h4>
           </div>
         </div>
 
-        <div class="gallery-item" data-cat="koupelna" data-title="Kompletni koupelna s umyvadlem a zavesnym WC" data-idx="8">
-          <picture>
-            <source srcset="img/thumbs/koupelna-02.webp" type="image/webp"/>
-            <img src="img/thumbs/koupelna-02.jpg" alt="Kompletní koupelna s umyvadlem a závěsným WC" loading="lazy" class="w-full"/>
-          </picture>
+        <!-- 4 -->
+        <div class="gallery-item" data-cat="detail" data-title="Profesionální nářadí a příprava" data-idx="3">
+          <img src="https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=600&h=900&fit=crop" alt="Nářadí" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Detail</span>
+            <h4 class="font-headline text-white text-lg">Profesionální nářadí</h4>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="gallery-item" data-cat="koupelna" data-title="Sprchový kout s italskou mozaikou" data-idx="4">
+          <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&h=800&fit=crop" alt="Sprchový kout" loading="lazy"/>
           <div class="gallery-overlay">
             <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Koupelna</span>
-            <h4 class="font-headline text-white text-lg">Kompletní koupelna</h4>
+            <h4 class="font-headline text-white text-lg">Sprchový kout – italská mozaika</h4>
           </div>
         </div>
 
-        <div class="gallery-item" data-cat="topeni" data-title="Tepelne cerpadlo Buderus s kondenzacnimi kotli" data-idx="9">
-          <picture>
-            <source srcset="img/thumbs/topeni-04.webp" type="image/webp"/>
-            <img src="img/thumbs/topeni-04.jpg" alt="Tepelné čerpadlo Buderus s kondenzačními kotli" loading="lazy" class="w-full"/>
-          </picture>
+        <!-- 6 -->
+        <div class="gallery-item" data-cat="plyn" data-title="Kondenzační kotel Viessmann – instalace" data-idx="5">
+          <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&h=700&fit=crop" alt="Kondenzační kotel" loading="lazy"/>
           <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
-            <h4 class="font-headline text-white text-lg">Tepelné čerpadlo Buderus</h4>
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Plyn</span>
+            <h4 class="font-headline text-white text-lg">Kondenzační kotel Viessmann</h4>
           </div>
         </div>
 
-        <div class="gallery-item" data-cat="voda" data-title="Ponorne cerpadlo s HDPE fittingy v betonove studni" data-idx="10">
-          <picture>
-            <source srcset="img/thumbs/voda-04.webp" type="image/webp"/>
-            <img src="img/thumbs/voda-04.jpg" alt="Ponorné čerpadlo s HDPE fittingy v betonové studni" loading="lazy" class="w-full"/>
-          </picture>
+        <!-- 7 -->
+        <div class="gallery-item" data-cat="voda" data-title="Rozvodná stanice teplé vody" data-idx="6">
+          <img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=600&h=600&fit=crop" alt="Rozvodná stanice" loading="lazy"/>
           <div class="gallery-overlay">
             <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vodoinstalace</span>
-            <h4 class="font-headline text-white text-lg">Ponorné čerpadlo v betonové studni</h4>
+            <h4 class="font-headline text-white text-lg">Rozvodná stanice teplé vody</h4>
           </div>
         </div>
 
-        <div class="gallery-item" data-cat="topeni" data-title="Rozdelovac podlahoveho topeni s projektovou dokumentaci" data-idx="11">
-          <picture>
-            <source srcset="img/thumbs/topeni-07.webp" type="image/webp"/>
-            <img src="img/thumbs/topeni-07.jpg" alt="Rozdělovač podlahového topení s projektovou dokumentací" loading="lazy" class="w-full"/>
-          </picture>
+        <!-- 8 -->
+        <div class="gallery-item" data-cat="koupelna" data-title="Mramorová koupelna – privátní byt Smíchov" data-idx="7">
+          <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&h=850&fit=crop" alt="Mramorová koupelna" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Koupelna</span>
+            <h4 class="font-headline text-white text-lg">Mramorová koupelna Smíchov</h4>
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="gallery-item" data-cat="topeni" data-title="Tepelné čerpadlo vzduch-voda" data-idx="8">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=700&fit=crop" alt="Tepelné čerpadlo" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
+            <h4 class="font-headline text-white text-lg">Tepelné čerpadlo vzduch-voda</h4>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="gallery-item" data-cat="detail" data-title="Precizní pájený spoj na mědi" data-idx="9">
+          <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebb6525?w=600&h=600&fit=crop" alt="Pájený spoj" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Detail</span>
+            <h4 class="font-headline text-white text-lg">Precizní pájený spoj na mědi</h4>
+          </div>
+        </div>
+
+        <!-- 11 -->
+        <div class="gallery-item" data-cat="voda" data-title="Vodoměrná sestava – komerční objekt" data-idx="10">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=500&fit=crop" alt="Vodoměrná sestava" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vodoinstalace</span>
+            <h4 class="font-headline text-white text-lg">Vodoměrná sestava</h4>
+          </div>
+        </div>
+
+        <!-- 12 -->
+        <div class="gallery-item" data-cat="koupelna" data-title="Volně stojící vana Duravit" data-idx="11">
+          <img src="https://images.unsplash.com/photo-1600566752229-250ed79470f8?w=600&h=750&fit=crop" alt="Vana Duravit" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Koupelna</span>
+            <h4 class="font-headline text-white text-lg">Volně stojící vana Duravit</h4>
+          </div>
+        </div>
+
+        <!-- 13 -->
+        <div class="gallery-item" data-cat="topeni" data-title="Radiátorové těleso – historický byt" data-idx="12">
+          <img src="https://images.unsplash.com/photo-1631545806609-45e8060f0a68?w=600&h=800&fit=crop" alt="Radiátor" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
+            <h4 class="font-headline text-white text-lg">Radiátorové těleso – historický byt</h4>
+          </div>
+        </div>
+
+        <!-- 14 -->
+        <div class="gallery-item" data-cat="plyn" data-title="Plynová přípojka – revize a montáž" data-idx="13">
+          <img src="https://images.unsplash.com/photo-1621905252472-30e1d8bf2e84?w=600&h=650&fit=crop" alt="Plynová přípojka" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Plyn</span>
+            <h4 class="font-headline text-white text-lg">Plynová přípojka – revize</h4>
+          </div>
+        </div>
+
+        <!-- 15 -->
+        <div class="gallery-item" data-cat="detail" data-title="Chromové ventily – designová armatura" data-idx="14">
+          <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&h=550&fit=crop" alt="Chromové ventily" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Detail</span>
+            <h4 class="font-headline text-white text-lg">Chromové ventily – designová armatura</h4>
+          </div>
+        </div>
+
+        <!-- 16 -->
+        <div class="gallery-item" data-cat="koupelna" data-title="WC s podomítkovým systémem Geberit" data-idx="15">
+          <img src="https://images.unsplash.com/photo-1564540586988-aa4e53c3d799?w=600&h=800&fit=crop" alt="WC Geberit" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Koupelna</span>
+            <h4 class="font-headline text-white text-lg">WC – podomítkový Geberit</h4>
+          </div>
+        </div>
+
+        <!-- 17 -->
+        <div class="gallery-item" data-cat="voda" data-title="PPR rozvody studené a teplé vody" data-idx="16">
+          <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&h=700&fit=crop" alt="PPR rozvody" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vodoinstalace</span>
+            <h4 class="font-headline text-white text-lg">PPR rozvody studené a teplé vody</h4>
+          </div>
+        </div>
+
+        <!-- 18 -->
+        <div class="gallery-item" data-cat="topeni" data-title="Rozdělovač podlahového topení" data-idx="17">
+          <img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=600&h=850&fit=crop" alt="Rozdělovač" loading="lazy"/>
           <div class="gallery-overlay">
             <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
             <h4 class="font-headline text-white text-lg">Rozdělovač podlahového topení</h4>
           </div>
         </div>
 
-        <div class="gallery-item" data-cat="koupelna" data-title="Geberit instalacni ramy v novostavbe" data-idx="12">
-          <picture>
-            <source srcset="img/thumbs/koupelna-04.webp" type="image/webp"/>
-            <img src="img/thumbs/koupelna-04.jpg" alt="Geberit instalační rámy v novostavbě" loading="lazy" class="w-full"/>
-          </picture>
+        <!-- 19 -->
+        <div class="gallery-item" data-cat="koupelna" data-title="Obklad velkoformátový – walk-in sprcha" data-idx="18">
+          <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&h=750&fit=crop" alt="Walk-in sprcha" loading="lazy"/>
           <div class="gallery-overlay">
             <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Koupelna</span>
-            <h4 class="font-headline text-white text-lg">Geberit instalační rámy v novostavbě</h4>
+            <h4 class="font-headline text-white text-lg">Walk-in sprcha – velkoformát</h4>
           </div>
         </div>
 
-        <div class="gallery-item" data-cat="topeni" data-title="Akumulacni zasobnik s medenymi armaturami" data-idx="13">
-          <picture>
-            <source srcset="img/thumbs/topeni-01.webp" type="image/webp"/>
-            <img src="img/thumbs/topeni-01.jpg" alt="Akumulační zásobník s měděnými armaturami" loading="lazy" class="w-full"/>
-          </picture>
+        <!-- 20 -->
+        <div class="gallery-item" data-cat="detail" data-title="Měření a projekt – příprava realizace" data-idx="19">
+          <img src="https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=600&h=600&fit=crop" alt="Měření" loading="lazy"/>
           <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
-            <h4 class="font-headline text-white text-lg">Akumulační zásobník s armaturami</h4>
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Detail</span>
+            <h4 class="font-headline text-white text-lg">Měření a projekt – příprava</h4>
           </div>
         </div>
 
-        <div class="gallery-item" data-cat="voda" data-title="Kanalizace v zemi podél domu" data-idx="14">
-          <picture>
-            <source srcset="img/thumbs/voda-03.webp" type="image/webp"/>
-            <img src="img/thumbs/voda-03.jpg" alt="Kanalizace v zemi podél domu" loading="lazy" class="w-full"/>
-          </picture>
+        <!-- 21 -->
+        <div class="gallery-item" data-cat="plyn" data-title="Plynový rozvod – bytový dům Holešovice" data-idx="20">
+          <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&h=600&fit=crop" alt="Plynový rozvod" loading="lazy"/>
+          <div class="gallery-overlay">
+            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Plyn</span>
+            <h4 class="font-headline text-white text-lg">Plynový rozvod Holešovice</h4>
+          </div>
+        </div>
+
+        <!-- 22 -->
+        <div class="gallery-item" data-cat="voda" data-title="Filtrační systém celého domu" data-idx="21">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=800&fit=crop" alt="Filtrační systém" loading="lazy"/>
           <div class="gallery-overlay">
             <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vodoinstalace</span>
-            <h4 class="font-headline text-white text-lg">Kanalizace v zemi podél domu</h4>
+            <h4 class="font-headline text-white text-lg">Filtrační systém celého domu</h4>
           </div>
         </div>
 
-        <div class="gallery-item" data-cat="topeni" data-title="Buderus kotelna - detail armatur a jisteni" data-idx="15">
-          <picture>
-            <source srcset="img/thumbs/topeni-09.webp" type="image/webp"/>
-            <img src="img/thumbs/topeni-09.jpg" alt="Buderus kotelna – detail armatur a jištění" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
-            <h4 class="font-headline text-white text-lg">Buderus kotelna – detail armatur</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="koupelna" data-title="Geberit kazeta v prubehu hrube montaze" data-idx="16">
-          <picture>
-            <source srcset="img/thumbs/koupelna-05.webp" type="image/webp"/>
-            <img src="img/thumbs/koupelna-05.jpg" alt="Geberit kazeta v průběhu hrubé montáže" loading="lazy" class="w-full"/>
-          </picture>
+        <!-- 23 -->
+        <div class="gallery-item" data-cat="koupelna" data-title="Dvojumyvadlo s podsvícením" data-idx="22">
+          <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&h=650&fit=crop" alt="Dvojumyvadlo" loading="lazy"/>
           <div class="gallery-overlay">
             <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Koupelna</span>
-            <h4 class="font-headline text-white text-lg">Geberit kazeta v hrubé montáži</h4>
+            <h4 class="font-headline text-white text-lg">Dvojumyvadlo s podsvícením</h4>
           </div>
         </div>
 
-        <div class="gallery-item" data-cat="topeni" data-title="Kotlovy rozvadev s obehavymi cerpadly Grundfos" data-idx="17">
-          <picture>
-            <source srcset="img/thumbs/topeni-02.webp" type="image/webp"/>
-            <img src="img/thumbs/topeni-02.jpg" alt="Kotlový rozvaděč s oběhovými čerpadly Grundfos" loading="lazy" class="w-full"/>
-          </picture>
+        <!-- 24 -->
+        <div class="gallery-item" data-cat="topeni" data-title="Kotelna – kompletní realizace" data-idx="23">
+          <img src="https://images.unsplash.com/photo-1631545806609-45e8060f0a68?w=600&h=700&fit=crop" alt="Kotelna" loading="lazy"/>
           <div class="gallery-overlay">
             <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
-            <h4 class="font-headline text-white text-lg">Kotlový rozvaděč Grundfos</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="voda" data-title="Kanalizace v ryze - detail napojeni" data-idx="18">
-          <picture>
-            <source srcset="img/thumbs/voda-05.webp" type="image/webp"/>
-            <img src="img/thumbs/voda-05.jpg" alt="Kanalizace v rýze – detail napojení" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vodoinstalace</span>
-            <h4 class="font-headline text-white text-lg">Kanalizace – detail napojení</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="topeni" data-title="Kotelna Wolf - technicka mistnost s kotli" data-idx="19">
-          <picture>
-            <source srcset="img/thumbs/topeni-12.webp" type="image/webp"/>
-            <img src="img/thumbs/topeni-12.jpg" alt="Kotelna Wolf – technická místnost s kotli" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
-            <h4 class="font-headline text-white text-lg">Kotelna Wolf</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="koupelna" data-title="Instalace WC a priprava koupelny" data-idx="20">
-          <picture>
-            <source srcset="img/thumbs/koupelna-06.webp" type="image/webp"/>
-            <img src="img/thumbs/koupelna-06.jpg" alt="Instalace WC a příprava koupelny" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Koupelna</span>
-            <h4 class="font-headline text-white text-lg">Instalace WC a příprava koupelny</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="topeni" data-title="Obehova cerpadla s elektrickym rozvadevem" data-idx="21">
-          <picture>
-            <source srcset="img/thumbs/topeni-10.webp" type="image/webp"/>
-            <img src="img/thumbs/topeni-10.jpg" alt="Oběhová čerpadla s elektrickým rozvaděčem" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
-            <h4 class="font-headline text-white text-lg">Oběhová čerpadla</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="voda" data-title="Kanalizace s rozvadevicimi prvky v zakladech" data-idx="22">
-          <picture>
-            <source srcset="img/thumbs/voda-06.webp" type="image/webp"/>
-            <img src="img/thumbs/voda-06.jpg" alt="Kanalizace s rozváděcími prvky v základech" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vodoinstalace</span>
-            <h4 class="font-headline text-white text-lg">Kanalizace v základech</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="topeni" data-title="Akumulacni zasobnik v technicke mistnosti" data-idx="23">
-          <picture>
-            <source srcset="img/thumbs/topeni-11.webp" type="image/webp"/>
-            <img src="img/thumbs/topeni-11.jpg" alt="Akumulační zásobník v technické místnosti" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
-            <h4 class="font-headline text-white text-lg">Akumulační zásobník</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="topeni" data-title="Buderus kotelna - pohled na cely otopny system" data-idx="24">
-          <picture>
-            <source srcset="img/thumbs/topeni-13.webp" type="image/webp"/>
-            <img src="img/thumbs/topeni-13.jpg" alt="Buderus kotelna – pohled na celý otopný systém" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
-            <h4 class="font-headline text-white text-lg">Buderus kotelna – celý systém</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="topeni" data-title="Buderus kondenzacni kotel v suterenu" data-idx="25">
-          <picture>
-            <source srcset="img/thumbs/topeni-14.webp" type="image/webp"/>
-            <img src="img/thumbs/topeni-14.jpg" alt="Buderus kondenzační kotel v suterénu" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Vytápění</span>
-            <h4 class="font-headline text-white text-lg">Buderus kondenzační kotel</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="ostatni" data-title="Realizace instalatorskych praci" data-idx="26">
-          <picture>
-            <source srcset="img/thumbs/ostatni-01.webp" type="image/webp"/>
-            <img src="img/thumbs/ostatni-01.jpg" alt="Realizace instalatérských prací" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Ostatní</span>
-            <h4 class="font-headline text-white text-lg">Realizace instalatérských prací</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="ostatni" data-title="Realizace instalatorskych praci" data-idx="27">
-          <picture>
-            <source srcset="img/thumbs/ostatni-02.webp" type="image/webp"/>
-            <img src="img/thumbs/ostatni-02.jpg" alt="Realizace instalatérských prací" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Ostatní</span>
-            <h4 class="font-headline text-white text-lg">Realizace instalatérských prací</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="ostatni" data-title="Realizace instalatorskych praci" data-idx="28">
-          <picture>
-            <source srcset="img/thumbs/ostatni-03.webp" type="image/webp"/>
-            <img src="img/thumbs/ostatni-03.jpg" alt="Realizace instalatérských prací" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Ostatní</span>
-            <h4 class="font-headline text-white text-lg">Realizace instalatérských prací</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="ostatni" data-title="Realizace instalatorskych praci" data-idx="29">
-          <picture>
-            <source srcset="img/thumbs/ostatni-04.webp" type="image/webp"/>
-            <img src="img/thumbs/ostatni-04.jpg" alt="Realizace instalatérských prací" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Ostatní</span>
-            <h4 class="font-headline text-white text-lg">Realizace instalatérských prací</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="ostatni" data-title="Realizace instalatorskych praci" data-idx="30">
-          <picture>
-            <source srcset="img/thumbs/ostatni-05.webp" type="image/webp"/>
-            <img src="img/thumbs/ostatni-05.jpg" alt="Realizace instalatérských prací" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Ostatní</span>
-            <h4 class="font-headline text-white text-lg">Realizace instalatérských prací</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="ostatni" data-title="Realizace instalatorskych praci" data-idx="31">
-          <picture>
-            <source srcset="img/thumbs/ostatni-06.webp" type="image/webp"/>
-            <img src="img/thumbs/ostatni-06.jpg" alt="Realizace instalatérských prací" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Ostatní</span>
-            <h4 class="font-headline text-white text-lg">Realizace instalatérských prací</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="ostatni" data-title="Realizace instalatorskych praci" data-idx="32">
-          <picture>
-            <source srcset="img/thumbs/ostatni-07.webp" type="image/webp"/>
-            <img src="img/thumbs/ostatni-07.jpg" alt="Realizace instalatérských prací" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Ostatní</span>
-            <h4 class="font-headline text-white text-lg">Realizace instalatérských prací</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="ostatni" data-title="Realizace instalatorskych praci" data-idx="33">
-          <picture>
-            <source srcset="img/thumbs/ostatni-08.webp" type="image/webp"/>
-            <img src="img/thumbs/ostatni-08.jpg" alt="Realizace instalatérských prací" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Ostatní</span>
-            <h4 class="font-headline text-white text-lg">Realizace instalatérských prací</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="ostatni" data-title="Realizace instalatorskych praci" data-idx="34">
-          <picture>
-            <source srcset="img/thumbs/ostatni-09.webp" type="image/webp"/>
-            <img src="img/thumbs/ostatni-09.jpg" alt="Realizace instalatérských prací" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Ostatní</span>
-            <h4 class="font-headline text-white text-lg">Realizace instalatérských prací</h4>
-          </div>
-        </div>
-
-        <div class="gallery-item" data-cat="ostatni" data-title="Realizace instalatorskych praci" data-idx="35">
-          <picture>
-            <source srcset="img/thumbs/ostatni-10.webp" type="image/webp"/>
-            <img src="img/thumbs/ostatni-10.jpg" alt="Realizace instalatérských prací" loading="lazy" class="w-full"/>
-          </picture>
-          <div class="gallery-overlay">
-            <span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">Ostatní</span>
-            <h4 class="font-headline text-white text-lg">Realizace instalatérských prací</h4>
+            <h4 class="font-headline text-white text-lg">Kotelna – kompletní realizace</h4>
           </div>
         </div>
 
       </div>
 
+      
     </div>
   </section>
 
@@ -807,7 +628,7 @@ nav.scrolled {
     <div class="max-w-2xl mx-auto reveal reveal-from-bottom">
       <h2 class="font-headline text-3xl md:text-5xl text-white mb-6">Líbí se vám moje práce?</h2>
       <p class="text-white/70 text-lg mb-10">Neváhejte se na mě obrátit</p>
-      <a id="category-cta" class="btn-shimmer inline-block bg-white text-primary px-10 py-5 font-bold tracking-[0.2em] uppercase hover:bg-white/90 hover:shadow-xl transition-all shadow-lg active:scale-95" href="index.html#kontakt">POPTAT REALIZACI</a>
+      <a class="btn-shimmer inline-block bg-white text-primary px-10 py-5 font-bold tracking-[0.2em] uppercase hover:bg-white/90 hover:shadow-xl transition-all shadow-lg active:scale-95" href="index.html#kontakt">POPTAT REALIZACI</a>
     </div>
   </section>
 
@@ -819,7 +640,7 @@ nav.scrolled {
   <div id="lb-prev" class="lb-nav"><span class="material-symbols-outlined text-3xl">chevron_left</span></div>
   <div id="lb-next" class="lb-nav"><span class="material-symbols-outlined text-3xl">chevron_right</span></div>
   <img id="lb-img" src="" alt=""/>
-  <div id="lightbox-caption">
+  <div id="lb-caption">
     <p class="font-headline text-white text-xl md:text-2xl mb-1" id="lb-title"></p>
     <p class="text-white/50 text-xs tracking-[0.2em] uppercase" id="lb-tag"></p>
   </div>
@@ -876,19 +697,6 @@ mobileMenu.querySelectorAll("a").forEach(link => {
   });
 });
 
-// === CTA contextual text ===
-const ctaBtn = document.getElementById("category-cta");
-const ctaTextMap = {
-  all:      "POPTAT REALIZACI",
-  topeni:   "ŘEŠÍM VYTÁPĚNÍ",
-  voda:     "POTŘEBUJI VODOINSTALACI",
-  koupelna: "CHCI NOVOU KOUPELNU",
-  ostatni:  "POPTAT REALIZACI"
-};
-function updateCTA(filter) {
-  ctaBtn.textContent = ctaTextMap[filter] || ctaTextMap.all;
-}
-
 // === Filter ===
 const pills = document.querySelectorAll(".filter-pill");
 const items = document.querySelectorAll(".gallery-item");
@@ -913,8 +721,7 @@ pills.forEach(pill => {
       }
     });
 
-    if (countEl) countEl.textContent = visible + " realizací";
-    updateCTA(filter);
+    countEl.textContent = visible + " realizací";
   });
 });
 
@@ -943,12 +750,12 @@ function showSlide() {
   const item = visibleItems[currentIdx];
   if (!item) return;
   const img = item.querySelector("img");
-  const thumbSrc = img.src;
-  const fullSrc = thumbSrc.replace("/thumbs/", "/full/").replace(".jpg", ".webp");
-  lbImg.src = fullSrc;
-  lbTitle.textContent = item.querySelector("h4") ? item.querySelector("h4").textContent : "";
+  // Load full-res version
+  const src = img.src.replace(/w=\d+/, "w=1400").replace(/h=\d+/, "h=1400");
+  lbImg.src = src;
+  lbTitle.textContent = item.dataset.title;
   const tagEl = item.querySelector(".tag-pill");
-  lbTag.textContent = tagEl ? tagEl.textContent.trim() : "";
+  lbTag.textContent = tagEl ? tagEl.textContent : "";
   lbCounter.textContent = (currentIdx + 1) + " / " + visibleItems.length;
 }
 
@@ -979,6 +786,7 @@ document.getElementById("lb-next").addEventListener("click", (e) => {
   showSlide();
 });
 
+// Keyboard nav
 document.addEventListener("keydown", e => {
   if (!lightbox.classList.contains("open")) return;
   if (e.key === "Escape") closeLightbox();
