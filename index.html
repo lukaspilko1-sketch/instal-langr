@@ -478,9 +478,12 @@
 <div class="flex items-center gap-2">
 <svg class="w-8 h-8 text-primary" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true">
 <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-<path d="M5 1.5c-0.4 1-2 2.8-2 4a2 2 0 0 0 4 0c0-1.2-1.6-3-2-4z" fill="currentColor"></path>
+<path d="M5 0.8c-0.5 1.3-2.5 3.6-2.5 5.4a2.5 2.5 0 0 0 5 0c0-1.8-2-4.1-2.5-5.4z" fill="currentColor"></path>
 </svg>
-<div class="text-3xl font-bold font-headline text-primary tracking-tighter">LANGR</div>
+<div class="flex flex-col items-start leading-none">
+<div class="logo-langr text-3xl font-bold font-headline text-primary tracking-tighter leading-none">LANGR</div>
+<div class="logo-tag font-sans font-bold uppercase text-primary/85 leading-none" style="text-align: justify; text-align-last: justify; font-size: 9px;">Instalatérství</div>
+</div>
 <span class="ml-4 text-[10px] tracking-[0.2em] uppercase text-on-surface-variant/60 font-sans font-bold border-l border-outline-variant/30 pl-4 py-1 block">Když to teče, víme proč</span>
 </div>
 <div class="hidden md:flex items-center gap-10" aria-label="Hlavní navigace">
@@ -725,7 +728,7 @@
 <section class="bg-white py-20 px-6" id="kontakt">
 <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
 <div class="reveal reveal-from-bottom">
-<h2 class="font-headline text-5xl md:text-6xl mb-10 text-on-surface">Pojďme<br/>začít.</h2>
+<h2 class="font-headline text-5xl md:text-6xl mb-10 text-on-surface">Spojme se.</h2>
 <div class="space-y-10">
 <div>
 <p class="text-primary text-xs tracking-widest uppercase mb-3 font-bold">Email</p>
@@ -782,7 +785,7 @@
 <div class="flex items-center gap-2 mb-4">
 <svg class="w-6 h-6 text-primary" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
 <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-<path d="M5 1.5c-0.4 1-2 2.8-2 4a2 2 0 0 0 4 0c0-1.2-1.6-3-2-4z" fill="currentColor"></path>
+<path d="M5 0.8c-0.5 1.3-2.5 3.6-2.5 5.4a2.5 2.5 0 0 0 5 0c0-1.8-2-4.1-2.5-5.4z" fill="currentColor"></path>
 </svg>
 <span class="font-headline text-primary italic text-3xl block">LANGR</span>
 </div>
@@ -872,5 +875,29 @@
         });
     }, { threshold: 0.6 });
     document.querySelectorAll(".counter").forEach(el => counterObserver.observe(el));
+
+    // === Synchronizace šířky taglinu "INSTALATÉRSTVÍ" pod LANGR ===
+    function fitLogoTagline() {
+        document.querySelectorAll(".logo-tag").forEach(tag => {
+            const main = tag.previousElementSibling;
+            if (!main || !main.classList.contains("logo-langr")) return;
+            tag.style.width = "auto";
+            tag.style.fontSize = "";
+            let fs = 10;
+            tag.style.fontSize = fs + "px";
+            const maxW = main.offsetWidth;
+            while (tag.scrollWidth > maxW && fs > 5) {
+                fs -= 0.25;
+                tag.style.fontSize = fs + "px";
+            }
+            tag.style.width = maxW + "px";
+        });
+    }
+    fitLogoTagline();
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(fitLogoTagline);
+    }
+    window.addEventListener("load", fitLogoTagline);
+    window.addEventListener("resize", fitLogoTagline);
 </script>
 </body></html>
