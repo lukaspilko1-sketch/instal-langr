@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Administrace obsahu — nepatří do vyhledávání
+Disallow: /admin/
+
+# Zdrojové fotky před optimalizací (nejsou součástí webu)
+Disallow: /img/reference/
+
+Sitemap: https://instalater-nymburk.cz/sitemap.xml
