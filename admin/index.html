@@ -289,7 +289,19 @@ tailwind.config = {
   </div>
 </div>
 
-<script src="config.js"></script>
-<script src="app.js"></script>
+<script>
+// Admin panel se používá zřídka, ale mění se často. Načítáme ho proto vždy
+// čerstvý — jinak prohlížeč po nasazení změn drží starou verzi v cache
+// a nové sekce se neobjeví, dokud uživatel neudělá tvrdý reload.
+(function () {
+  var v = "?v=" + Date.now();
+  ["config.js", "app.js"].forEach(function (src) {
+    var s = document.createElement("script");
+    s.src = src + v;
+    s.async = false;          // zachová pořadí: config.js musí být první
+    document.head.appendChild(s);
+  });
+})();
+</script>
 </body>
 </html>
