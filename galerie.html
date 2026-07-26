@@ -1007,32 +1007,76 @@ function updateCTA(filter) {
   ctaBtn.textContent = ctaTextMap[filter] || ctaTextMap.all;
 }
 
+// === Dynamické položky galerie z content.json ===
+// FALLBACK: pokud se content.json nenačte nebo neobsahuje gallery.items,
+// zůstanou položky napsané napevno v HTML níže.
+const galleryGrid = document.getElementById("gallery");
+
+const CAT_LABELS = {
+  topeni: "Vytápění",
+  voda: "Vodoinstalace",
+  koupelna: "Koupelna",
+  ostatni: "Ostatní"
+};
+
+function esc(str) {
+  return String(str == null ? "" : str)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function renderGalleryItems(list) {
+  galleryGrid.innerHTML = list.map((it, i) => {
+    const src = it.src || "";
+    const srcset = it.srcset || src.replace(/\.(jpe?g|png)$/i, ".webp");
+    const tag = it.tag || CAT_LABELS[it.cat] || "";
+    const title = it.title || "";
+    const alt = it.alt || title;
+    return '' +
+      '<div class="gallery-item" data-cat="' + esc(it.cat) + '" data-title="' + esc(title) + '" data-idx="' + i + '">' +
+        '<picture>' +
+          '<source srcset="' + esc(srcset) + '" type="image/webp"/>' +
+          '<img src="' + esc(src) + '" alt="' + esc(alt) + '" loading="' + (i < 4 ? "eager" : "lazy") + '" class="w-full"/>' +
+        '</picture>' +
+        '<div class="gallery-overlay">' +
+          '<span class="tag-pill inline-block text-[10px] tracking-[0.2em] uppercase text-white/70 mb-2">' + esc(tag) + '</span>' +
+          '<h4 class="font-headline text-white text-lg">' + esc(title) + '</h4>' +
+        '</div>' +
+      '</div>';
+  }).join("");
+}
+
 // === Filter ===
 const pills = document.querySelectorAll(".filter-pill");
-const items = document.querySelectorAll(".gallery-item");
 const countEl = document.getElementById("gallery-count");
+
+// Živý seznam — po překreslení galerie se musí načíst znovu
+function allItems() {
+  return [...document.querySelectorAll(".gallery-item")];
+}
+
+function applyFilter(filter) {
+  let visible = 0;
+  allItems().forEach(item => {
+    const match = filter === "all" || item.dataset.cat === filter;
+    if (!match) {
+      item.classList.add("hiding");
+      setTimeout(() => { item.style.display = "none"; }, 400);
+    } else {
+      item.style.display = "";
+      setTimeout(() => { item.classList.remove("hiding"); }, 30);
+      visible++;
+    }
+  });
+  if (countEl) countEl.textContent = visible + " realizací";
+  updateCTA(filter);
+}
 
 pills.forEach(pill => {
   pill.addEventListener("click", () => {
     pills.forEach(p => p.classList.remove("active"));
     pill.classList.add("active");
-    const filter = pill.dataset.filter;
-    let visible = 0;
-
-    items.forEach(item => {
-      const match = filter === "all" || item.dataset.cat === filter;
-      if (!match) {
-        item.classList.add("hiding");
-        setTimeout(() => { item.style.display = "none"; }, 400);
-      } else {
-        item.style.display = "";
-        setTimeout(() => { item.classList.remove("hiding"); }, 30);
-        visible++;
-      }
-    });
-
-    if (countEl) countEl.textContent = visible + " realizací";
-    updateCTA(filter);
+    applyFilter(pill.dataset.filter);
   });
 });
 
@@ -1062,7 +1106,9 @@ function showSlide() {
   if (!item) return;
   const img = item.querySelector("img");
   const thumbSrc = img.src;
-  const fullSrc = thumbSrc.replace("/thumbs/", "/full/").replace(".jpg", ".webp");
+  const fullSrc = thumbSrc.replace("/thumbs/", "/full/").replace(/\.(jpe?g|png)$/i, ".webp");
+  // Kdyby verze ve full/ chyběla, ukážeme aspoň náhled místo prázdna
+  lbImg.onerror = () => { lbImg.onerror = null; lbImg.src = thumbSrc; };
   lbImg.src = fullSrc;
   lbTitle.textContent = item.querySelector("h4") ? item.querySelector("h4").textContent : "";
   const tagEl = item.querySelector(".tag-pill");
@@ -1075,12 +1121,13 @@ function closeLightbox() {
   document.body.style.overflow = "";
 }
 
-items.forEach(item => {
-  item.addEventListener("click", () => {
-    visibleItems = getVisibleItems();
-    const idx = visibleItems.indexOf(item);
-    if (idx >= 0) openLightbox(idx);
-  });
+// Delegace — funguje i po překreslení galerie z content.json
+galleryGrid.addEventListener("click", e => {
+  const item = e.target.closest(".gallery-item");
+  if (!item || !galleryGrid.contains(item)) return;
+  visibleItems = getVisibleItems();
+  const idx = visibleItems.indexOf(item);
+  if (idx >= 0) openLightbox(idx);
 });
 
 document.getElementById("lb-close").addEventListener("click", closeLightbox);
@@ -1103,6 +1150,22 @@ document.addEventListener("keydown", e => {
   if (e.key === "ArrowLeft") { currentIdx = (currentIdx - 1 + visibleItems.length) % visibleItems.length; showSlide(); }
   if (e.key === "ArrowRight") { currentIdx = (currentIdx + 1) % visibleItems.length; showSlide(); }
 });
+
+// === Načtení položek galerie z content.json ===
+// Při selhání zůstanou položky napevno v HTML (fallback).
+fetch("content.json?v=" + Date.now(), { cache: "no-store" })
+  .then(res => { if (!res.ok) throw new Error("HTTP " + res.status); return res.json(); })
+  .then(data => {
+    const list = data && data.gallery && data.gallery.items;
+    if (!Array.isArray(list) || !list.length) throw new Error("gallery.items chybí nebo je prázdné");
+    renderGalleryItems(list);
+    // Obnovit filtr podle aktivní pilulky (výchozí "all")
+    const active = document.querySelector(".filter-pill.active");
+    applyFilter(active ? active.dataset.filter : "all");
+  })
+  .catch(err => {
+    console.warn("[galerie] Používám položky z HTML.", err.message);
+  });
 </script>
 <script src="js/content-loader.js"></script>
 </body>

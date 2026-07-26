@@ -7,7 +7,6 @@
     "ctaText": "ZAČÍT PROJEKT",
     "tagline": "Když to teče, víme proč"
   },
-
   "stats": {
     "yearsValue": "20",
     "yearsLabel": "Let praxe",
@@ -16,7 +15,6 @@
     "locationValue": "Nymburk",
     "locationLabel": "Poděbrady · Kolín · Praha & okolí"
   },
-
   "services": {
     "eyebrow": "Expertíza",
     "headingLine1": "Technická",
@@ -45,7 +43,6 @@
       }
     ]
   },
-
   "about": {
     "eyebrow": "O mně",
     "heading": "Deset let v oboru mě naučilo, že nejdůležitějším nástrojem není klíč, ale trpělivost.",
@@ -55,19 +52,25 @@
     "paragraph4": "Sídlím v Nymburce a běžně pracuji v okruhu Poděbrad, Kolína a Prahy. Po dohodě dojedu i jinam po České republice.",
     "signature": "S úctou k řemeslu,\nLukáš Langr"
   },
-
   "portfolio": {
     "eyebrow": "Kde už jsem pomohl",
     "heading": "Ukázky mé práce",
     "ctaText": "ZOBRAZIT VŠECHNY REFERENCE",
     "items": [
-      { "title": "Rozvody" },
-      { "title": "Koupelna" },
-      { "title": "Centrální topný uzel" },
-      { "title": "Podlahové topení" }
+      {
+        "title": "Rozvody"
+      },
+      {
+        "title": "Koupelna"
+      },
+      {
+        "title": "Centrální topný uzel"
+      },
+      {
+        "title": "Podlahové topení"
+      }
     ]
   },
-
   "testimonials": [
     {
       "quote": "Hledali jsme někoho na rekonstrukci koupelny. Pan Langr k práci přistoupil poctivě a výsledek stojí za to.",
@@ -78,14 +81,12 @@
       "author": "Jana, Nymburk"
     }
   ],
-
   "emergency": {
     "headingLine1": "Havárie nečekají.",
     "headingLine2": "Já také ne.",
     "ctaText": "VOLEJTE: +420 732 964 228",
     "note": "Rychlý výjezd · Nymburk · Poděbrady · Kolín · Praha"
   },
-
   "contact": {
     "heading": "Spojme se.",
     "email": "lukaslangr11@seznam.cz",
@@ -95,7 +96,6 @@
     "hours": "Po–Pá 7:00–17:00 · Havárie 24/7",
     "formButtonText": "ODESLAT DOTAZ"
   },
-
   "footer": {
     "brandText": "Poctivé instalatérské a topenářské služby pro klienty v Nymburce, Poděbradech, Kolíně, Praze a po celém Středočeském kraji. Po dohodě i jinde v ČR.",
     "rating": "5,0",
@@ -108,13 +108,338 @@
     "copyright": "© 2026 Lukáš Langr · Instalatérské služby Nymburk",
     "domain": "instalater-nymburk.cz"
   },
-
   "gallery": {
     "eyebrow": "Portfolio",
     "headingLine1": "Ukázky",
     "headingLine2": "mé práce",
     "perex": "Každá fotografie je důkazem práce, za kterou ručím svým jménem. Výběr realizací z Nymburka, Poděbrad, Kolína, Prahy a okolí.",
     "ctaHeading": "Líbí se vám moje práce?",
-    "ctaPerex": "Realizace v Nymburce, Poděbradech, Kolíně, Praze i napříč Středočeským krajem. Neváhejte se na mě obrátit."
+    "ctaPerex": "Realizace v Nymburce, Poděbradech, Kolíně, Praze i napříč Středočeským krajem. Neváhejte se na mě obrátit.",
+    "items": [
+      {
+        "id": "topeni-08",
+        "src": "img/thumbs/topeni-08.jpg",
+        "srcset": "img/thumbs/topeni-08.webp",
+        "alt": "Dvojkotel Buderus s měděnými rozvody — realizace Nymburk",
+        "title": "Dvojkotel Buderus s měděnými rozvody",
+        "tag": "Vytápění · Nymburk",
+        "cat": "topeni"
+      },
+      {
+        "id": "koupelna-03",
+        "src": "img/thumbs/koupelna-03.jpg",
+        "srcset": "img/thumbs/koupelna-03.webp",
+        "alt": "Sprchový kout – celkový pohled na realizaci v Praze",
+        "title": "Sprchový kout – celkový pohled",
+        "tag": "Koupelna · Praha",
+        "cat": "koupelna"
+      },
+      {
+        "id": "voda-02",
+        "src": "img/thumbs/voda-02.jpg",
+        "srcset": "img/thumbs/voda-02.webp",
+        "alt": "Ponorné čerpadlo Grundfos v betonové šachtě — realizace Poděbrady",
+        "title": "Ponorné čerpadlo Grundfos",
+        "tag": "Vodoinstalace · Poděbrady",
+        "cat": "voda"
+      },
+      {
+        "id": "topeni-03",
+        "src": "img/thumbs/topeni-03.jpg",
+        "srcset": "img/thumbs/topeni-03.webp",
+        "alt": "Podlahové topení – červené trubky na termoizolaci — realizace Kolín",
+        "title": "Podlahové topení – červené trubky",
+        "tag": "Vytápění · Kolín",
+        "cat": "topeni"
+      },
+      {
+        "id": "topeni-05",
+        "src": "img/thumbs/topeni-05.jpg",
+        "srcset": "img/thumbs/topeni-05.webp",
+        "alt": "Podlahové topení – panorama velké místnosti — realizace Nymburk",
+        "title": "Podlahové topení – panorama",
+        "tag": "Vytápění · Nymburk",
+        "cat": "topeni"
+      },
+      {
+        "id": "koupelna-01",
+        "src": "img/thumbs/koupelna-01.jpg",
+        "srcset": "img/thumbs/koupelna-01.webp",
+        "alt": "Sprchový kout s designovými obklady — realizace Praha",
+        "title": "Sprchový kout s designovými obklady",
+        "tag": "Koupelna · Praha",
+        "cat": "koupelna"
+      },
+      {
+        "id": "voda-01",
+        "src": "img/thumbs/voda-01.jpg",
+        "srcset": "img/thumbs/voda-01.webp",
+        "alt": "Měděné a PPR rozvody v technické místnosti — realizace Nymburk",
+        "title": "Měděné a PPR rozvody",
+        "tag": "Vodoinstalace · Nymburk",
+        "cat": "voda"
+      },
+      {
+        "id": "topeni-06",
+        "src": "img/thumbs/topeni-06.jpg",
+        "srcset": "img/thumbs/topeni-06.webp",
+        "alt": "Kotelna s izolovaným potrubím a rozdělovačem — realizace Poděbrady",
+        "title": "Kotelna – izolované potrubí",
+        "tag": "Vytápění · Poděbrady",
+        "cat": "topeni"
+      },
+      {
+        "id": "koupelna-02",
+        "src": "img/thumbs/koupelna-02.jpg",
+        "srcset": "img/thumbs/koupelna-02.webp",
+        "alt": "Kompletní koupelna s umyvadlem a závěsným WC — realizace Praha",
+        "title": "Kompletní koupelna",
+        "tag": "Koupelna · Praha",
+        "cat": "koupelna"
+      },
+      {
+        "id": "topeni-04",
+        "src": "img/thumbs/topeni-04.jpg",
+        "srcset": "img/thumbs/topeni-04.webp",
+        "alt": "Tepelné čerpadlo Buderus s kondenzačními kotli — realizace Kolín",
+        "title": "Tepelné čerpadlo Buderus",
+        "tag": "Vytápění · Kolín",
+        "cat": "topeni"
+      },
+      {
+        "id": "voda-04",
+        "src": "img/thumbs/voda-04.jpg",
+        "srcset": "img/thumbs/voda-04.webp",
+        "alt": "Ponorné čerpadlo s HDPE fittingy v betonové studni — realizace Nymburk",
+        "title": "Ponorné čerpadlo v betonové studni",
+        "tag": "Vodoinstalace · Nymburk",
+        "cat": "voda"
+      },
+      {
+        "id": "topeni-07",
+        "src": "img/thumbs/topeni-07.jpg",
+        "srcset": "img/thumbs/topeni-07.webp",
+        "alt": "Rozdělovač podlahového topení s projektovou dokumentací — realizace Poděbrady",
+        "title": "Rozdělovač podlahového topení",
+        "tag": "Vytápění · Poděbrady",
+        "cat": "topeni"
+      },
+      {
+        "id": "koupelna-04",
+        "src": "img/thumbs/koupelna-04.jpg",
+        "srcset": "img/thumbs/koupelna-04.webp",
+        "alt": "Geberit instalační rámy v novostavbě — realizace Praha",
+        "title": "Geberit instalační rámy v novostavbě",
+        "tag": "Koupelna · Praha",
+        "cat": "koupelna"
+      },
+      {
+        "id": "topeni-01",
+        "src": "img/thumbs/topeni-01.jpg",
+        "srcset": "img/thumbs/topeni-01.webp",
+        "alt": "Akumulační zásobník s měděnými armaturami — realizace Nymburk",
+        "title": "Akumulační zásobník s armaturami",
+        "tag": "Vytápění · Nymburk",
+        "cat": "topeni"
+      },
+      {
+        "id": "voda-03",
+        "src": "img/thumbs/voda-03.jpg",
+        "srcset": "img/thumbs/voda-03.webp",
+        "alt": "Kanalizace v zemi podél domu — realizace Kolín",
+        "title": "Kanalizace v zemi podél domu",
+        "tag": "Vodoinstalace · Kolín",
+        "cat": "voda"
+      },
+      {
+        "id": "topeni-09",
+        "src": "img/thumbs/topeni-09.jpg",
+        "srcset": "img/thumbs/topeni-09.webp",
+        "alt": "Buderus kotelna – detail armatur a jištění",
+        "title": "Buderus kotelna – detail armatur",
+        "tag": "Vytápění",
+        "cat": "topeni"
+      },
+      {
+        "id": "koupelna-05",
+        "src": "img/thumbs/koupelna-05.jpg",
+        "srcset": "img/thumbs/koupelna-05.webp",
+        "alt": "Geberit kazeta v průběhu hrubé montáže",
+        "title": "Geberit kazeta v hrubé montáži",
+        "tag": "Koupelna",
+        "cat": "koupelna"
+      },
+      {
+        "id": "topeni-02",
+        "src": "img/thumbs/topeni-02.jpg",
+        "srcset": "img/thumbs/topeni-02.webp",
+        "alt": "Kotlový rozvaděč s oběhovými čerpadly Grundfos",
+        "title": "Kotlový rozvaděč Grundfos",
+        "tag": "Vytápění",
+        "cat": "topeni"
+      },
+      {
+        "id": "voda-05",
+        "src": "img/thumbs/voda-05.jpg",
+        "srcset": "img/thumbs/voda-05.webp",
+        "alt": "Kanalizace v rýze – detail napojení",
+        "title": "Kanalizace – detail napojení",
+        "tag": "Vodoinstalace",
+        "cat": "voda"
+      },
+      {
+        "id": "topeni-12",
+        "src": "img/thumbs/topeni-12.jpg",
+        "srcset": "img/thumbs/topeni-12.webp",
+        "alt": "Kotelna Wolf – technická místnost s kotli — realizace Poděbrady",
+        "title": "Kotelna Wolf",
+        "tag": "Vytápění · Poděbrady",
+        "cat": "topeni"
+      },
+      {
+        "id": "koupelna-06",
+        "src": "img/thumbs/koupelna-06.jpg",
+        "srcset": "img/thumbs/koupelna-06.webp",
+        "alt": "Instalace WC a příprava koupelny — realizace Praha",
+        "title": "Instalace WC a příprava koupelny",
+        "tag": "Koupelna · Praha",
+        "cat": "koupelna"
+      },
+      {
+        "id": "topeni-10",
+        "src": "img/thumbs/topeni-10.jpg",
+        "srcset": "img/thumbs/topeni-10.webp",
+        "alt": "Oběhová čerpadla s elektrickým rozvaděčem",
+        "title": "Oběhová čerpadla",
+        "tag": "Vytápění",
+        "cat": "topeni"
+      },
+      {
+        "id": "voda-06",
+        "src": "img/thumbs/voda-06.jpg",
+        "srcset": "img/thumbs/voda-06.webp",
+        "alt": "Kanalizace s rozváděcími prvky v základech — realizace Nymburk",
+        "title": "Kanalizace v základech",
+        "tag": "Vodoinstalace · Nymburk",
+        "cat": "voda"
+      },
+      {
+        "id": "topeni-11",
+        "src": "img/thumbs/topeni-11.jpg",
+        "srcset": "img/thumbs/topeni-11.webp",
+        "alt": "Akumulační zásobník v technické místnosti",
+        "title": "Akumulační zásobník",
+        "tag": "Vytápění",
+        "cat": "topeni"
+      },
+      {
+        "id": "topeni-13",
+        "src": "img/thumbs/topeni-13.jpg",
+        "srcset": "img/thumbs/topeni-13.webp",
+        "alt": "Buderus kotelna – pohled na celý otopný systém — realizace Kolín",
+        "title": "Buderus kotelna – celý systém",
+        "tag": "Vytápění · Kolín",
+        "cat": "topeni"
+      },
+      {
+        "id": "topeni-14",
+        "src": "img/thumbs/topeni-14.jpg",
+        "srcset": "img/thumbs/topeni-14.webp",
+        "alt": "Buderus kondenzační kotel v suterénu — realizace Poděbrady",
+        "title": "Buderus kondenzační kotel",
+        "tag": "Vytápění · Poděbrady",
+        "cat": "topeni"
+      },
+      {
+        "id": "ostatni-01",
+        "src": "img/thumbs/ostatni-01.jpg",
+        "srcset": "img/thumbs/ostatni-01.webp",
+        "alt": "Realizace instalatérských prací",
+        "title": "Realizace instalatérských prací",
+        "tag": "Ostatní",
+        "cat": "ostatni"
+      },
+      {
+        "id": "ostatni-02",
+        "src": "img/thumbs/ostatni-02.jpg",
+        "srcset": "img/thumbs/ostatni-02.webp",
+        "alt": "Realizace instalatérských prací",
+        "title": "Realizace instalatérských prací",
+        "tag": "Ostatní",
+        "cat": "ostatni"
+      },
+      {
+        "id": "ostatni-03",
+        "src": "img/thumbs/ostatni-03.jpg",
+        "srcset": "img/thumbs/ostatni-03.webp",
+        "alt": "Realizace instalatérských prací",
+        "title": "Realizace instalatérských prací",
+        "tag": "Ostatní",
+        "cat": "ostatni"
+      },
+      {
+        "id": "ostatni-04",
+        "src": "img/thumbs/ostatni-04.jpg",
+        "srcset": "img/thumbs/ostatni-04.webp",
+        "alt": "Realizace instalatérských prací",
+        "title": "Realizace instalatérských prací",
+        "tag": "Ostatní",
+        "cat": "ostatni"
+      },
+      {
+        "id": "ostatni-05",
+        "src": "img/thumbs/ostatni-05.jpg",
+        "srcset": "img/thumbs/ostatni-05.webp",
+        "alt": "Realizace instalatérských prací",
+        "title": "Realizace instalatérských prací",
+        "tag": "Ostatní",
+        "cat": "ostatni"
+      },
+      {
+        "id": "ostatni-06",
+        "src": "img/thumbs/ostatni-06.jpg",
+        "srcset": "img/thumbs/ostatni-06.webp",
+        "alt": "Realizace instalatérských prací",
+        "title": "Realizace instalatérských prací",
+        "tag": "Ostatní",
+        "cat": "ostatni"
+      },
+      {
+        "id": "ostatni-07",
+        "src": "img/thumbs/ostatni-07.jpg",
+        "srcset": "img/thumbs/ostatni-07.webp",
+        "alt": "Realizace instalatérských prací",
+        "title": "Realizace instalatérských prací",
+        "tag": "Ostatní",
+        "cat": "ostatni"
+      },
+      {
+        "id": "ostatni-08",
+        "src": "img/thumbs/ostatni-08.jpg",
+        "srcset": "img/thumbs/ostatni-08.webp",
+        "alt": "Realizace instalatérských prací",
+        "title": "Realizace instalatérských prací",
+        "tag": "Ostatní",
+        "cat": "ostatni"
+      },
+      {
+        "id": "ostatni-09",
+        "src": "img/thumbs/ostatni-09.jpg",
+        "srcset": "img/thumbs/ostatni-09.webp",
+        "alt": "Realizace instalatérských prací",
+        "title": "Realizace instalatérských prací",
+        "tag": "Ostatní",
+        "cat": "ostatni"
+      },
+      {
+        "id": "ostatni-10",
+        "src": "img/thumbs/ostatni-10.jpg",
+        "srcset": "img/thumbs/ostatni-10.webp",
+        "alt": "Realizace instalatérských prací",
+        "title": "Realizace instalatérských prací",
+        "tag": "Ostatní",
+        "cat": "ostatni"
+      }
+    ]
   }
 }

@@ -156,8 +156,28 @@
         { path: "gallery.ctaHeading",   label: "Nadpis",            type: "text" },
         { path: "gallery.ctaPerex",     label: "Text",              type: "textarea" }
       ]
+    },
+    {
+      id: "gallery_items", icon: "add_photo_alternate", label: "Položky galerie",
+      desc: "Správa fotek — přidávání, editace, mazání a řazení.",
+      custom: true
     }
   ];
+
+  // Kategorie fotek. "ostatni" je zde proto, že ji používá 10 stávajících fotek.
+  var CATEGORIES = [
+    { value: "topeni",   label: "Vytápění" },
+    { value: "voda",     label: "Vodoinstalace" },
+    { value: "koupelna", label: "Koupelna" },
+    { value: "ostatni",  label: "Ostatní" }
+  ];
+
+  function catLabel(value) {
+    for (var i = 0; i < CATEGORIES.length; i++) {
+      if (CATEGORIES[i].value === value) return CATEGORIES[i].label;
+    }
+    return value || "—";
+  }
 
   /* ============================================================
    *  POMOCNÉ FUNKCE
@@ -313,6 +333,15 @@
                  section.desc + "</p>";
       panel.innerHTML = html;
 
+      // Sekce s vlastní renderovací logikou (např. správa fotek).
+      // Panel musí být v DOM dřív, než ho začneme plnit — renderGalleryGrid()
+      // si prvky hledá přes getElementById.
+      if (section.custom) {
+        wrap.appendChild(panel);
+        buildGalleryItemsPanel(panel);
+        return;
+      }
+
       section.fields.forEach(function (field) {
         if (field.divider) {
           var d = document.createElement("p");
@@ -359,6 +388,364 @@
       });
 
       wrap.appendChild(panel);
+    });
+  }
+
+  /* ============================================================
+   *  SPRÁVA FOTEK GALERIE
+   * ============================================================ */
+  var MAX_UPLOAD_BYTES = 5 * 1024 * 1024;   // 5 MB
+  var THUMB_WIDTH = 600;                     // odpovídá stávajícím náhledům
+  var FULL_WIDTH  = 1400;                    // verze pro lightbox
+  var galleryEditingId = null;               // null = režim přidání
+
+  function galleryItems() {
+    if (!state.content.gallery) state.content.gallery = {};
+    if (!Array.isArray(state.content.gallery.items)) state.content.gallery.items = [];
+    return state.content.gallery.items;
+  }
+
+  /** Zmenší obrázek na danou šířku a vrátí base64 (bez data: prefixu). */
+  function resizeToBase64(img, maxWidth, mime, quality) {
+    var w = img.naturalWidth || img.width;
+    var h = img.naturalHeight || img.height;
+    var scale = w > maxWidth ? maxWidth / w : 1;
+
+    var canvas = document.createElement("canvas");
+    canvas.width  = Math.round(w * scale);
+    canvas.height = Math.round(h * scale);
+
+    var ctx = canvas.getContext("2d");
+    ctx.imageSmoothingQuality = "high";
+    // Bílé pozadí — průhledné PNG by v JPEGu zčernalo
+    if (mime === "image/jpeg") {
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+    var dataUrl = canvas.toDataURL(mime, quality);
+    // Prohlížeč bez podpory WebP vrátí PNG — poznáme podle prefixu
+    if (dataUrl.indexOf("data:" + mime) !== 0) return null;
+    return dataUrl.split(",")[1];
+  }
+
+  /**
+   * Vytvoří z nahraného souboru tři varianty, stejně jako mají stávající fotky:
+   *   img/thumbs/{id}.jpg   — náhled v mřížce
+   *   img/thumbs/{id}.webp  — náhled pro moderní prohlížeče
+   *   img/full/{id}.webp    — velká verze pro lightbox
+   * Překreslením přes canvas se zároveň odstraní EXIF včetně GPS souřadnic.
+   */
+  function processImage(file) {
+    return new Promise(function (resolve, reject) {
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function () {
+        URL.revokeObjectURL(url);
+        try {
+          resolve({
+            width: img.naturalWidth,
+            height: img.naturalHeight,
+            thumbJpg:  resizeToBase64(img, THUMB_WIDTH, "image/jpeg", 0.85),
+            thumbWebp: resizeToBase64(img, THUMB_WIDTH, "image/webp", 0.80),
+            fullWebp:  resizeToBase64(img, FULL_WIDTH,  "image/webp", 0.85)
+          });
+        } catch (e) { reject(new Error("Obrázek se nepodařilo zpracovat: " + e.message)); }
+      };
+      img.onerror = function () {
+        URL.revokeObjectURL(url);
+        reject(new Error("Soubor se nepodařilo načíst jako obrázek."));
+      };
+      img.src = url;
+    });
+  }
+
+  /** Nahraje jeden soubor do repozitáře přes Contents API. */
+  function uploadFile(path, base64, message) {
+    var url = API + "/repos/" + CFG.owner + "/" + CFG.repo + "/contents/" + path;
+    return fetch(url + "?ref=" + encodeURIComponent(CFG.branch), { headers: ghHeaders(), cache: "no-store" })
+      .then(function (res) {
+        // Existující soubor musíme přepsat s jeho SHA, nový bez ní
+        return res.ok ? res.json().then(function (d) { return d.sha; }) : null;
+      })
+      .catch(function () { return null; })
+      .then(function (sha) {
+        var body = { message: message, content: base64, branch: CFG.branch };
+        if (sha) body.sha = sha;
+        return fetch(url, {
+          method: "PUT",
+          headers: Object.assign({ "Content-Type": "application/json" }, ghHeaders()),
+          body: JSON.stringify(body)
+        });
+      })
+      .then(function (res) {
+        if (!res.ok) throw new Error(ghError(res) + " (soubor " + path + ")");
+        return res.json();
+      });
+  }
+
+  function buildGalleryItemsPanel(panel) {
+    var box = document.createElement("div");
+    box.innerHTML =
+      // ---- Formulář ----
+      '<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-6 mb-10">' +
+        '<div class="flex items-center justify-between mb-5">' +
+          '<h3 id="gi-form-title" class="font-headline text-lg">Přidat fotku</h3>' +
+          '<button id="gi-cancel" class="hidden text-xs tracking-widest uppercase font-bold text-on-surface-variant hover:text-primary transition-colors">Zrušit úpravu</button>' +
+        '</div>' +
+
+        '<div class="grid grid-cols-1 md:grid-cols-2 gap-5">' +
+          '<div class="field"><label>Název</label>' +
+            '<input id="gi-title" type="text" placeholder="Např. Podlahové topení v novostavbě"/></div>' +
+          '<div class="field"><label>Kategorie</label>' +
+            '<select id="gi-cat" class="w-full bg-white border border-outline-variant/50 rounded px-3 py-2.5 text-[15px]">' +
+              CATEGORIES.map(function (c) {
+                return '<option value="' + c.value + '">' + c.label + '</option>';
+              }).join("") +
+            '</select></div>' +
+        '</div>' +
+
+        '<div class="field mt-5"><label>Alt text</label>' +
+          '<input id="gi-alt" type="text" placeholder="Popis toho, co je na fotce"/>' +
+          '<p class="hint">Pro SEO a přístupnost — popiš, co je na fotce vidět.</p></div>' +
+
+        '<div class="field mt-5"><label>Popisek nad názvem</label>' +
+          '<input id="gi-tag" type="text" placeholder="Např. Vytápění · Nymburk"/>' +
+          '<p class="hint">Malý text nad názvem. Necháš-li prázdné, doplní se název kategorie.</p></div>' +
+
+        '<div class="field mt-5"><label id="gi-file-label">Nahrát fotku</label>' +
+          '<input id="gi-file" type="file" accept="image/jpeg,image/png,image/webp" class="text-sm"/>' +
+          '<p class="hint">JPG, PNG nebo WebP, max 5 MB. Fotka se automaticky zmenší a zbaví se údajů o poloze.</p>' +
+          '<div id="gi-preview" class="hidden mt-3"><img class="h-32 rounded border border-outline-variant/30 object-cover"/></div>' +
+        '</div>' +
+
+        '<button id="gi-submit" class="btn-shimmer mt-6 bg-primary text-on-primary px-8 py-3.5 font-bold tracking-[0.15em] uppercase text-xs hover:bg-primary/90 transition-all active:scale-95 shadow-lg flex items-center gap-2.5 disabled:opacity-50 disabled:cursor-not-allowed">' +
+          '<span class="material-symbols-outlined text-[18px]">upload</span>' +
+          '<span id="gi-submit-text">NAHRÁT FOTKU</span>' +
+        '</button>' +
+      '</div>' +
+
+      // ---- Mřížka ----
+      '<div class="flex items-center justify-between mb-4">' +
+        '<h3 class="font-headline text-lg">Fotky v galerii</h3>' +
+        '<span id="gi-count" class="text-xs text-on-surface-variant/60"></span>' +
+      '</div>' +
+      '<div id="gi-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>';
+
+    panel.appendChild(box);
+
+    // --- Náhled vybraného souboru ---
+    var fileInput = box.querySelector("#gi-file");
+    fileInput.addEventListener("change", function () {
+      var f = fileInput.files[0];
+      var prev = box.querySelector("#gi-preview");
+      if (!f) { prev.classList.add("hidden"); return; }
+      prev.querySelector("img").src = URL.createObjectURL(f);
+      prev.classList.remove("hidden");
+    });
+
+    box.querySelector("#gi-submit").addEventListener("click", submitGalleryItem);
+    box.querySelector("#gi-cancel").addEventListener("click", function () { resetGalleryForm(); });
+
+    renderGalleryGrid();
+  }
+
+  function renderGalleryGrid() {
+    var grid = document.getElementById("gi-grid");
+    if (!grid) return;
+    var list = galleryItems();
+
+    document.getElementById("gi-count").textContent = list.length + " fotek";
+
+    if (!list.length) {
+      grid.innerHTML = '<p class="text-sm text-on-surface-variant/60 col-span-full py-8 text-center">Zatím žádné fotky.</p>';
+      return;
+    }
+
+    grid.innerHTML = list.map(function (it, i) {
+      return '' +
+        '<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl overflow-hidden group">' +
+          '<div class="relative aspect-[4/3] bg-surface-container">' +
+            '<img src="../' + it.src + '" alt="" class="w-full h-full object-cover" loading="lazy"/>' +
+            '<span class="absolute top-2 left-2 bg-primary text-on-primary text-[10px] tracking-widest uppercase font-bold px-2 py-1 rounded">' +
+              catLabel(it.cat) + '</span>' +
+          '</div>' +
+          '<div class="p-4">' +
+            '<p class="font-headline text-sm mb-1 truncate" title="' + (it.title || "") + '">' + (it.title || "Bez názvu") + '</p>' +
+            '<p class="text-[11px] text-on-surface-variant/50 truncate mb-3">' + it.id + '</p>' +
+            '<div class="flex items-center gap-1">' +
+              '<button data-act="edit" data-i="' + i + '" class="flex-1 text-[11px] tracking-widest uppercase font-bold text-primary border border-primary/30 rounded py-2 hover:bg-primary/5 transition-colors">Upravit</button>' +
+              '<button data-act="del" data-i="' + i + '" class="flex-1 text-[11px] tracking-widest uppercase font-bold text-error border border-error/30 rounded py-2 hover:bg-error/5 transition-colors">Smazat</button>' +
+              '<button data-act="up" data-i="' + i + '" class="p-2 text-on-surface-variant hover:text-primary transition-colors disabled:opacity-25" ' + (i === 0 ? "disabled" : "") + ' title="Posunout nahoru">' +
+                '<span class="material-symbols-outlined text-[16px]">arrow_upward</span></button>' +
+              '<button data-act="down" data-i="' + i + '" class="p-2 text-on-surface-variant hover:text-primary transition-colors disabled:opacity-25" ' + (i === list.length - 1 ? "disabled" : "") + ' title="Posunout dolů">' +
+                '<span class="material-symbols-outlined text-[16px]">arrow_downward</span></button>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    }).join("");
+
+    grid.querySelectorAll("button[data-act]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        galleryAction(btn.dataset.act, parseInt(btn.dataset.i, 10));
+      });
+    });
+  }
+
+  function galleryAction(act, i) {
+    var list = galleryItems();
+    var item = list[i];
+    if (!item) return;
+
+    if (act === "del") {
+      if (!confirm('Opravdu smazat fotku "' + (item.title || item.id) + '"?\n\n' +
+                   'Zmizí z galerie po uložení. Samotný soubor zůstane v repozitáři.')) return;
+      list.splice(i, 1);
+      if (galleryEditingId === item.id) resetGalleryForm();
+      toast("info", "Fotka odebrána", "Změnu potvrdíš tlačítkem ULOŽIT.");
+    }
+    else if (act === "up" && i > 0) {
+      list.splice(i - 1, 0, list.splice(i, 1)[0]);
+    }
+    else if (act === "down" && i < list.length - 1) {
+      list.splice(i + 1, 0, list.splice(i, 1)[0]);
+    }
+    else if (act === "edit") {
+      galleryEditingId = item.id;
+      document.getElementById("gi-form-title").textContent = "Upravit fotku";
+      document.getElementById("gi-title").value = item.title || "";
+      document.getElementById("gi-cat").value = item.cat || "topeni";
+      document.getElementById("gi-alt").value = item.alt || "";
+      document.getElementById("gi-tag").value = item.tag || "";
+      document.getElementById("gi-submit-text").textContent = "ULOŽIT ZMĚNY";
+      document.getElementById("gi-file-label").textContent = "Nahradit fotku (nepovinné)";
+      document.getElementById("gi-cancel").classList.remove("hidden");
+      var prev = document.getElementById("gi-preview");
+      prev.querySelector("img").src = "../" + item.src;
+      prev.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    renderGalleryGrid();
+    updateDirtyIndicator();
+  }
+
+  function resetGalleryForm() {
+    galleryEditingId = null;
+    ["gi-title", "gi-alt", "gi-tag"].forEach(function (id) {
+      var el = document.getElementById(id); if (el) el.value = "";
+    });
+    var f = document.getElementById("gi-file"); if (f) f.value = "";
+    var prev = document.getElementById("gi-preview"); if (prev) prev.classList.add("hidden");
+    var t = document.getElementById("gi-form-title"); if (t) t.textContent = "Přidat fotku";
+    var s = document.getElementById("gi-submit-text"); if (s) s.textContent = "NAHRÁT FOTKU";
+    var fl = document.getElementById("gi-file-label"); if (fl) fl.textContent = "Nahrát fotku";
+    var c = document.getElementById("gi-cancel"); if (c) c.classList.add("hidden");
+  }
+
+  function submitGalleryItem() {
+    var title = document.getElementById("gi-title").value.trim();
+    var cat   = document.getElementById("gi-cat").value;
+    var alt   = document.getElementById("gi-alt").value.trim();
+    var tag   = document.getElementById("gi-tag").value.trim();
+    var file  = document.getElementById("gi-file").files[0];
+    var list  = galleryItems();
+
+    if (!title) { toast("error", "Chybí název", "Vyplň název fotky."); return; }
+
+    var editing = galleryEditingId
+      ? list.filter(function (x) { return x.id === galleryEditingId; })[0]
+      : null;
+
+    if (!editing && !file) { toast("error", "Chybí fotka", "Vyber soubor s fotkou."); return; }
+
+    // --- Jen textová úprava, bez nové fotky ---
+    if (editing && !file) {
+      editing.title = title;
+      editing.cat = cat;
+      editing.alt = alt || title;
+      editing.tag = tag || catLabel(cat);
+      resetGalleryForm();
+      renderGalleryGrid();
+      updateDirtyIndicator();
+      toast("success", "Upraveno", "Změnu potvrdíš tlačítkem ULOŽIT.");
+      return;
+    }
+
+    // --- Validace souboru ---
+    var allowed = ["image/jpeg", "image/png", "image/webp"];
+    if (allowed.indexOf(file.type) === -1) {
+      toast("error", "Nepodporovaný formát", "Povolené jsou jen JPG, PNG a WebP.");
+      return;
+    }
+    if (file.size > MAX_UPLOAD_BYTES) {
+      toast("error", "Soubor je moc velký",
+        "Maximum je 5 MB, tvůj soubor má " + (file.size / 1024 / 1024).toFixed(1) + " MB.");
+      return;
+    }
+
+    var btn = document.getElementById("gi-submit");
+    var btnText = document.getElementById("gi-submit-text");
+    btn.disabled = true;
+    btnText.innerHTML = '<span class="spinner"></span>';
+
+    var id = cat + "-" + Date.now();
+    var paths = {
+      thumbJpg:  "img/thumbs/" + id + ".jpg",
+      thumbWebp: "img/thumbs/" + id + ".webp",
+      fullWebp:  "img/full/"   + id + ".webp"
+    };
+
+    processImage(file).then(function (out) {
+      if (!out.thumbJpg) throw new Error("Nepodařilo se vytvořit náhled.");
+
+      var msg = "content: fotka galerie " + id;
+      // Nahráváme postupně; JPEG je povinný, WebP varianty jsou nadstandard
+      var chain = uploadFile(paths.thumbJpg, out.thumbJpg, msg + " (náhled)");
+
+      if (out.thumbWebp) {
+        chain = chain.then(function () { return uploadFile(paths.thumbWebp, out.thumbWebp, msg + " (náhled webp)"); });
+      }
+      if (out.fullWebp) {
+        chain = chain.then(function () { return uploadFile(paths.fullWebp, out.fullWebp, msg + " (velká verze)"); });
+      }
+      return chain.then(function () { return out; });
+    })
+    .then(function (out) {
+      var record = {
+        id: id,
+        src: paths.thumbJpg,
+        srcset: out.thumbWebp ? paths.thumbWebp : paths.thumbJpg,
+        alt: alt || title,
+        title: title,
+        tag: tag || catLabel(cat),
+        cat: cat
+      };
+
+      if (editing) {
+        // Nahrazení fotky u existující položky — zachováme pořadí
+        var idx = list.indexOf(editing);
+        list[idx] = record;
+      } else {
+        list.unshift(record);
+      }
+
+      resetGalleryForm();
+      renderGalleryGrid();
+      updateDirtyIndicator();
+
+      toast("success", "Fotka nahrána",
+        "Soubory jsou v repozitáři. Nezapomeň nahoře kliknout na ULOŽIT — teprve tím se fotka objeví na webu.", 7000);
+    })
+    .catch(function (err) {
+      toast("error", "Nahrání selhalo", err.message);
+    })
+    .finally(function () {
+      btn.disabled = false;
+      // Po úspěchu je formulář vyresetovaný, po chybě zůstává v původním režimu
+      btnText.textContent = galleryEditingId ? "ULOŽIT ZMĚNY" : "NAHRÁT FOTKU";
     });
   }
 
