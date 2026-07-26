@@ -87,6 +87,42 @@
   }
   .contact a { color: var(--primary); text-decoration: none; font-weight: 500; }
   .contact a:hover { text-decoration: underline; }
+
+  /* === Odznak autora webu (weby-hned.cz) === */
+  .author-badge {
+    display: inline-flex; align-items: center; gap: 14px;
+    margin-top: 32px; padding: 10px 18px;
+    background: #151515;
+    border: 1px solid rgba(212,160,58,0.25);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform .35s cubic-bezier(.4,0,.2,1), box-shadow .35s ease, border-color .35s ease;
+  }
+  .author-badge__label {
+    font-size: 9px; letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 700; color: rgba(255,255,255,.45); white-space: nowrap;
+    transition: color .35s ease;
+  }
+  .author-badge__logo {
+    height: 26px; width: auto; display: block;
+    transition: transform .35s cubic-bezier(.34,1.4,.64,1);
+  }
+  .author-badge:hover, .author-badge:focus-visible {
+    border-color: #d4a03a;
+    transform: translateY(-4px);
+    box-shadow: 0 0 0 4px rgba(212,160,58,.22), 0 14px 32px rgba(17,17,17,.32);
+    outline: none;
+  }
+  .author-badge:hover .author-badge__label,
+  .author-badge:focus-visible .author-badge__label { color: #d4a03a; }
+  .author-badge:hover .author-badge__logo,
+  .author-badge:focus-visible .author-badge__logo { transform: scale(1.04); }
+  .author-badge:active { transform: translateY(-1px); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .author-badge, .author-badge__logo, .author-badge__label { transition: none; }
+    .author-badge:hover { transform: none; }
+  }
 </style>
 </head>
 <body>
@@ -112,6 +148,11 @@
     Potřebujete instalatéra hned?<br/>
     <a href="tel:+420732964228">+420 732 964 228</a> · <a href="mailto:lukaslangr11@seznam.cz">lukaslangr11@seznam.cz</a>
   </div>
+
+  <a class="author-badge" href="https://weby-hned.cz" target="_blank" rel="noopener noreferrer" aria-label="Web vytvořil weby-hned.cz — tvorba webů a správa e-shopů (otevře se v novém okně)">
+    <span class="author-badge__label">Web vytvořil</span>
+    <img class="author-badge__logo" src="/img/logo-weby-hned.svg" alt="weby-hned.cz — tvorba webů a správa e-shopů" width="148" height="26"/>
+  </a>
 
 </body>
 </html>
