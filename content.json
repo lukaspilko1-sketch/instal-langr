@@ -1,0 +1,120 @@
+{
+  "hero": {
+    "eyebrow": "INSTALATÉRSKÉ SLUŽBY",
+    "headingLine1": "Nejsem firma.",
+    "headingLine2": "Jsem Lukáš Langr.",
+    "perex": "Osobní přístup není marketingová fráze. Je to závazek preciznosti, kterou věnuji každému spoji a každému projektu — od koupelny v Poděbradech po novostavbu v Praze. Vaše instalace není zakázka, je to mé řemeslo.",
+    "ctaText": "ZAČÍT PROJEKT",
+    "tagline": "Když to teče, víme proč"
+  },
+
+  "stats": {
+    "yearsValue": "20",
+    "yearsLabel": "Let praxe",
+    "projectsValue": "200",
+    "projectsLabel": "Realizací",
+    "locationValue": "Nymburk",
+    "locationLabel": "Poděbrady · Kolín · Praha & okolí"
+  },
+
+  "services": {
+    "eyebrow": "Expertíza",
+    "headingLine1": "Technická",
+    "headingLine2": "Preciznost",
+    "perex": "Každý systém je navržen s ohledem na energetickou efektivitu a dlouhodobou stabilitu.",
+    "items": [
+      {
+        "num": "01",
+        "title": "Vodoinstalace",
+        "text": "Od rozvodů v novostavbách a bytových domech v Nymburce a okolí po drobné opravy vodovodního potrubí v koupelnách."
+      },
+      {
+        "num": "02",
+        "title": "Vytápění",
+        "text": "Montáže kotlů, tepelných čerpadel, rozvody topení a podlahové vytápění pro rodinné domy v Kolíně, Praze i napříč Středočeským krajem. Návrhy s důrazem na komfort a úspory zákazníka."
+      },
+      {
+        "num": "03",
+        "title": "Plynoinstalace",
+        "text": "Montáže a servis kondenzačních kotlů, výměna regulátorů u plynoměrů, opravy netěsností na plynovém potrubí — Nymburk, Poděbrady a okolí."
+      },
+      {
+        "num": "04",
+        "title": "Koupelny",
+        "text": "Kompletní realizace koupelen na klíč pro klienty v Praze a Středočeském kraji — od návrhu, bouracích a elektrických prací, obkladů, rozvodů odpadu, vody i topení až po finální dokončení."
+      }
+    ]
+  },
+
+  "about": {
+    "eyebrow": "O mně",
+    "heading": "Deset let v oboru mě naučilo, že nejdůležitějším nástrojem není klíč, ale trpělivost.",
+    "paragraph1": "Instalatéřinu dělám přes deset let a pořád mě baví věci, které prostě fungují. Žádná havárie za rok, žádné mokré stropy. Jen práce, za kterou se mohu podepsat.",
+    "paragraph2": "Pozvat cizího člověka domů chce důvěru. Chodím včas, pracuji čistě a po sobě uklidím. Každou instalaci vám vysvětlím tak, abyste věděli, co máte za systém ve vlastním bytě.",
+    "paragraph3": "Když přijdu k vám domů, nejdu jen „opravit trubku“. Hledám řešení, které bude fungovat po dlouhá léta. Používám materiály, které bych neváhal použít u sebe doma.",
+    "paragraph4": "Sídlím v Nymburce a běžně pracuji v okruhu Poděbrad, Kolína a Prahy. Po dohodě dojedu i jinam po České republice.",
+    "signature": "S úctou k řemeslu,\nLukáš Langr"
+  },
+
+  "portfolio": {
+    "eyebrow": "Kde už jsem pomohl",
+    "heading": "Ukázky mé práce",
+    "ctaText": "ZOBRAZIT VŠECHNY REFERENCE",
+    "items": [
+      { "title": "Rozvody" },
+      { "title": "Koupelna" },
+      { "title": "Centrální topný uzel" },
+      { "title": "Podlahové topení" }
+    ]
+  },
+
+  "testimonials": [
+    {
+      "quote": "Hledali jsme někoho na rekonstrukci koupelny. Pan Langr k práci přistoupil poctivě a výsledek stojí za to.",
+      "author": "Tomáš, Praha"
+    },
+    {
+      "quote": "Technické řešení vytápění našeho domu je přesně tak, jak jsme si představovali. Žádné zbytečnosti, vše čisté a perfektně funkční.",
+      "author": "Jana, Nymburk"
+    }
+  ],
+
+  "emergency": {
+    "headingLine1": "Havárie nečekají.",
+    "headingLine2": "Já také ne.",
+    "ctaText": "VOLEJTE: +420 732 964 228",
+    "note": "Rychlý výjezd · Nymburk · Poděbrady · Kolín · Praha"
+  },
+
+  "contact": {
+    "heading": "Spojme se.",
+    "email": "lukaslangr11@seznam.cz",
+    "phone": "+420 732 964 228",
+    "phoneHref": "+420732964228",
+    "location": "Nymburk · Poděbrady · Kolín · Praha",
+    "hours": "Po–Pá 7:00–17:00 · Havárie 24/7",
+    "formButtonText": "ODESLAT DOTAZ"
+  },
+
+  "footer": {
+    "brandText": "Poctivé instalatérské a topenářské služby pro klienty v Nymburce, Poděbradech, Kolíně, Praze a po celém Středočeském kraji. Po dohodě i jinde v ČR.",
+    "rating": "5,0",
+    "reviewCount": "25",
+    "name": "Lukáš Langr",
+    "ico": "74215752",
+    "address": "Josefa Mánesa 1883\n288 02 Nymburk",
+    "hoursNormal": "Po–Pá 7:00–17:00",
+    "hoursEmergency": "Havárie 24/7",
+    "copyright": "© 2026 Lukáš Langr · Instalatérské služby Nymburk",
+    "domain": "instalater-nymburk.cz"
+  },
+
+  "gallery": {
+    "eyebrow": "Portfolio",
+    "headingLine1": "Ukázky",
+    "headingLine2": "mé práce",
+    "perex": "Každá fotografie je důkazem práce, za kterou ručím svým jménem. Výběr realizací z Nymburka, Poděbrad, Kolína, Prahy a okolí.",
+    "ctaHeading": "Líbí se vám moje práce?",
+    "ctaPerex": "Realizace v Nymburce, Poděbradech, Kolíně, Praze i napříč Středočeským krajem. Neváhejte se na mě obrátit."
+  }
+}

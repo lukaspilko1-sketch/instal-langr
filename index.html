@@ -482,7 +482,7 @@
 <path d="M5 0.8c-0.5 1.3-2.5 3.6-2.5 5.4a2.5 2.5 0 0 0 5 0c0-1.8-2-4.1-2.5-5.4z" fill="currentColor"></path>
 </svg>
 <div class="text-3xl font-bold font-headline text-primary tracking-tighter">LANGR</div>
-<span class="ml-4 text-[10px] tracking-[0.2em] uppercase text-on-surface-variant/60 font-sans font-bold border-l border-outline-variant/30 pl-4 py-1 block">Když to teče, víme proč</span>
+<span data-cms="hero.tagline" class="ml-4 text-[10px] tracking-[0.2em] uppercase text-on-surface-variant/60 font-sans font-bold border-l border-outline-variant/30 pl-4 py-1 block">Když to teče, víme proč</span>
 </div>
 <div class="hidden md:flex items-center gap-10" aria-label="Hlavní navigace">
 <a class="nav-link tracking-widest uppercase text-xs font-sans text-on-surface-variant hover:text-primary transition-colors duration-300" href="#sluzby">S čím pomůžu</a>
@@ -515,16 +515,16 @@
 <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent md:bg-gradient-to-r md:from-background/20 md:to-transparent"></div>
 </div>
 <div class="w-full md:w-1/2 px-6 md:px-16 pt-32 pb-12 md:py-0 z-20 relative order-1 md:order-2 md:mt-24 reveal reveal-from-bottom active" style="transition-delay: 0.3s">
-<p class="label-md text-primary tracking-[0.3em] uppercase mb-4 text-sm font-bold">INSTALATÉRSKÉ SLUŽBY</p>
+<p data-cms="hero.eyebrow" class="label-md text-primary tracking-[0.3em] uppercase mb-4 text-sm font-bold">INSTALATÉRSKÉ SLUŽBY</p>
 <h1 class="font-headline text-4xl md:text-6xl lg:text-7xl leading-tight text-on-surface mb-8 md:-ml-32">
-                Nejsem firma.<br/>
-<span class="italic font-normal text-primary">Jsem Lukáš Langr.</span>
+                <span data-cms="hero.headingLine1">Nejsem firma.</span><br/>
+<span data-cms="hero.headingLine2" class="italic font-normal text-primary">Jsem Lukáš Langr.</span>
 </h1>
-<p class="max-w-md text-on-surface-variant text-base md:text-lg leading-relaxed mb-10">
+<p data-cms="hero.perex" class="max-w-md text-on-surface-variant text-base md:text-lg leading-relaxed mb-10">
                 Osobní přístup není marketingová fráze. Je to závazek preciznosti, kterou věnuji každému spoji a každému projektu — od koupelny v Poděbradech po novostavbu v Praze. Vaše instalace není zakázka, je to mé řemeslo.
             </p>
 <div class="flex items-center gap-8">
-<a class="btn-shimmer bg-primary text-on-primary px-8 py-4 text-sm tracking-widest uppercase font-bold hover:bg-primary/90 hover:shadow-xl transition-all active:scale-95 shadow-lg text-center" href="#kontakt">ZAČÍT PROJEKT</a>
+<a class="btn-shimmer bg-primary text-on-primary px-8 py-4 text-sm tracking-widest uppercase font-bold hover:bg-primary/90 hover:shadow-xl transition-all active:scale-95 shadow-lg text-center" href="#kontakt" data-cms="hero.ctaText">ZAČÍT PROJEKT</a>
 <div class="hairline-x w-16 hidden lg:block"></div>
 </div>
 </div>
@@ -537,18 +537,18 @@
 <section class="bg-primary py-10 px-6 overflow-hidden">
 <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-around gap-8 md:gap-4">
 <div class="stat-block text-center text-on-primary reveal reveal-from-bottom" style="transition-delay:0.1s">
-<p class="font-headline text-5xl md:text-6xl font-bold"><span class="counter" data-target="20">0</span>+</p>
-<p class="text-xs tracking-[0.3em] uppercase mt-2 opacity-70 font-bold">Let praxe</p>
+<p class="font-headline text-5xl md:text-6xl font-bold"><span class="counter" data-target="20" data-cms-counter="stats.yearsValue">0</span>+</p>
+<p data-cms="stats.yearsLabel" class="text-xs tracking-[0.3em] uppercase mt-2 opacity-70 font-bold">Let praxe</p>
 </div>
 <div class="hidden md:block hairline-y h-14 opacity-30"></div>
 <div class="stat-block text-center text-on-primary reveal reveal-from-bottom" style="transition-delay:0.2s">
-<p class="font-headline text-5xl md:text-6xl font-bold"><span class="counter" data-target="200">0</span>+</p>
-<p class="text-xs tracking-[0.3em] uppercase mt-2 opacity-70 font-bold">Realizací</p>
+<p class="font-headline text-5xl md:text-6xl font-bold"><span class="counter" data-target="200" data-cms-counter="stats.projectsValue">0</span>+</p>
+<p data-cms="stats.projectsLabel" class="text-xs tracking-[0.3em] uppercase mt-2 opacity-70 font-bold">Realizací</p>
 </div>
 <div class="hidden md:block hairline-y h-14 opacity-30"></div>
 <div class="stat-block text-center text-on-primary reveal reveal-from-bottom" style="transition-delay:0.3s">
-<p class="font-headline text-5xl md:text-6xl font-bold">Nymburk</p>
-<p class="text-xs tracking-[0.3em] uppercase mt-2 opacity-70 font-bold">Poděbrady · Kolín · Praha &amp; okolí</p>
+<p data-cms="stats.locationValue" class="font-headline text-5xl md:text-6xl font-bold">Nymburk</p>
+<p data-cms="stats.locationLabel" class="text-xs tracking-[0.3em] uppercase mt-2 opacity-70 font-bold">Poděbrady · Kolín · Praha &amp; okolí</p>
 </div>
 </div>
 </section>
@@ -556,36 +556,36 @@
 <section class="bg-surface-container-lowest py-20 md:py-24 px-6 md:px-12 relative overflow-hidden" id="sluzby">
 <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
 <div class="md:col-span-4 mb-12 md:mb-0 reveal reveal-from-bottom md:pt-12">
-<span class="text-primary text-xs tracking-[0.4em] uppercase block mb-4 font-bold">Expertíza</span>
-<h2 class="font-headline text-5xl text-on-surface mb-8">Technická<br/>Preciznost</h2>
-<p class="text-on-surface-variant max-w-xs">Každý systém je navržen s ohledem na energetickou efektivitu a dlouhodobou stabilitu.</p>
+<span data-cms="services.eyebrow" class="text-primary text-xs tracking-[0.4em] uppercase block mb-4 font-bold">Expertíza</span>
+<h2 class="font-headline text-5xl text-on-surface mb-8"><span data-cms="services.headingLine1">Technická</span><br/><span data-cms="services.headingLine2">Preciznost</span></h2>
+<p data-cms="services.perex" class="text-on-surface-variant max-w-xs">Každý systém je navržen s ohledem na energetickou efektivitu a dlouhodobou stabilitu.</p>
 </div>
 <div class="md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 md:gap-y-16">
 <div class="service-card group reveal reveal-from-bottom bg-surface-container p-8 border border-outline-variant/10 shadow-sm rounded-lg" style="transition-delay: 0.1s">
 <span class="service-num font-headline text-primary/10 text-8xl block -mb-12 translate-x-[-10px] group-hover:text-primary/20 transition-colors">01</span>
-<h3 class="service-title font-headline text-3xl mb-4 relative z-10 text-on-surface">Vodoinstalace</h3>
-<p class="text-on-surface-variant text-sm leading-loose border-outline-variant/20">
+<h3 data-cms="services.items.0.title" class="service-title font-headline text-3xl mb-4 relative z-10 text-on-surface">Vodoinstalace</h3>
+<p data-cms="services.items.0.text" class="text-on-surface-variant text-sm leading-loose border-outline-variant/20">
                         Od rozvodů v novostavbách a bytových domech v Nymburce a okolí po drobné opravy vodovodního potrubí v koupelnách.
                     </p>
 </div>
 <div class="service-card group md:mt-20 reveal reveal-from-bottom bg-surface-container p-8 border border-outline-variant/10 shadow-sm rounded-lg" style="transition-delay: 0.2s">
 <span class="service-num font-headline text-primary/10 text-8xl block -mb-12 translate-x-[-10px] group-hover:text-primary/20 transition-colors">02</span>
-<h3 class="service-title font-headline text-3xl mb-4 relative z-10 text-on-surface">Vytápění</h3>
-<p class="text-on-surface-variant text-sm leading-loose border-outline-variant/20">
+<h3 data-cms="services.items.1.title" class="service-title font-headline text-3xl mb-4 relative z-10 text-on-surface">Vytápění</h3>
+<p data-cms="services.items.1.text" class="text-on-surface-variant text-sm leading-loose border-outline-variant/20">
                         Montáže kotlů, tepelných čerpadel, rozvody topení a podlahové vytápění pro rodinné domy v Kolíně, Praze i napříč Středočeským krajem. Návrhy s důrazem na komfort a úspory zákazníka.
                     </p>
 </div>
 <div class="service-card group reveal reveal-from-bottom bg-surface-container p-8 border border-outline-variant/10 shadow-sm rounded-lg" style="transition-delay: 0.3s">
 <span class="service-num font-headline text-primary/10 text-8xl block -mb-12 translate-x-[-10px] group-hover:text-primary/20 transition-colors">03</span>
-<h3 class="service-title font-headline text-3xl mb-4 relative z-10 text-on-surface">Plynoinstalace</h3>
-<p class="text-on-surface-variant text-sm leading-loose border-outline-variant/20">
+<h3 data-cms="services.items.2.title" class="service-title font-headline text-3xl mb-4 relative z-10 text-on-surface">Plynoinstalace</h3>
+<p data-cms="services.items.2.text" class="text-on-surface-variant text-sm leading-loose border-outline-variant/20">
                         Montáže a servis kondenzačních kotlů, výměna regulátorů u plynoměrů, opravy netěsností na plynovém potrubí — Nymburk, Poděbrady a okolí.
                     </p>
 </div>
 <div class="service-card group md:mt-20 reveal reveal-from-bottom bg-surface-container p-8 border border-outline-variant/10 shadow-sm rounded-lg" style="transition-delay: 0.4s">
 <span class="service-num font-headline text-primary/10 text-8xl block -mb-12 translate-x-[-10px] group-hover:text-primary/20 transition-colors">04</span>
-<h3 class="service-title font-headline text-3xl mb-4 relative z-10 text-on-surface">Koupelny</h3>
-<p class="text-on-surface-variant text-sm leading-loose border-outline-variant/20">
+<h3 data-cms="services.items.3.title" class="service-title font-headline text-3xl mb-4 relative z-10 text-on-surface">Koupelny</h3>
+<p data-cms="services.items.3.text" class="text-on-surface-variant text-sm leading-loose border-outline-variant/20">
                         Kompletní realizace koupelen na klíč pro klienty v Praze a Středočeském kraji — od návrhu, bouracích a elektrických prací, obkladů, rozvodů odpadu, vody i topení až po finální dokončení.
                     </p>
 </div>
@@ -596,24 +596,24 @@
 <!-- About Section (The Letter) - Compacted -->
 <section class="py-12 md:py-16 px-6 md:px-0 bg-white" id="kdo-jsem">
 <div class="max-w-4xl mx-auto border-l border-outline-variant/30 pl-8 md:pl-16 py-2 reveal reveal-from-bottom">
-<p class="font-headline text-primary italic text-xl mb-4">O mně</p>
-<h2 class="font-headline text-3xl md:text-4xl mb-6 leading-tight text-on-surface">
+<p data-cms="about.eyebrow" class="font-headline text-primary italic text-xl mb-4">O mně</p>
+<h2 data-cms="about.heading" class="font-headline text-3xl md:text-4xl mb-6 leading-tight text-on-surface">
                 Deset let v oboru mě naučilo, že nejdůležitějším nástrojem není klíč, ale trpělivost.
             </h2>
 <div class="space-y-4 text-on-surface-variant text-lg leading-relaxed max-w-2xl">
-<p>
+<p data-cms="about.paragraph1">
                     Instalatéřinu dělám přes deset let a pořád mě baví věci, které prostě fungují. Žádná havárie za rok, žádné mokré stropy. Jen práce, za kterou se mohu podepsat.
                 </p>
-<p>
+<p data-cms="about.paragraph2">
                     Pozvat cizího člověka domů chce důvěru. Chodím včas, pracuji čistě a po sobě uklidím. Každou instalaci vám vysvětlím tak, abyste věděli, co máte za systém ve vlastním bytě.
                 </p>
-<p>
+<p data-cms="about.paragraph3">
                     Když přijdu k vám domů, nejdu jen „opravit trubku“. Hledám řešení, které bude fungovat po dlouhá léta. Používám materiály, které bych neváhal použít u sebe doma.
                 </p>
-<p>
+<p data-cms="about.paragraph4">
                     Sídlím v Nymburce a běžně pracuji v okruhu Poděbrad, Kolína a Prahy. Po dohodě dojedu i jinam po České republice.
                 </p>
-<p class="font-headline italic text-on-surface pt-4">
+<p data-cms-html="about.signature" class="font-headline italic text-on-surface pt-4">
                     S úctou k řemeslu,<br/>
                     Lukáš Langr
                 </p>
@@ -623,8 +623,8 @@
 <!-- Portfolio -->
 <section class="py-20 md:py-24 px-6 bg-white" id="prace">
 <div class="text-center mb-16 reveal reveal-from-bottom">
-<p class="label-md text-primary tracking-[0.4em] uppercase mb-4 font-bold">Kde už jsem pomohl</p>
-<h2 class="font-headline text-5xl text-on-surface">Ukázky mé práce</h2>
+<p data-cms="portfolio.eyebrow" class="label-md text-primary tracking-[0.4em] uppercase mb-4 font-bold">Kde už jsem pomohl</p>
+<h2 data-cms="portfolio.heading" class="font-headline text-5xl text-on-surface">Ukázky mé práce</h2>
 </div>
 <div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
 <div class="space-y-8 reveal reveal-from-bottom" style="transition-delay: 0.1s">
@@ -635,7 +635,7 @@
 </picture>
 <div class="p-6">
 
-<h4 class="font-headline text-xl text-on-surface">Rozvody</h4>
+<h4 data-cms="portfolio.items.0.title" class="font-headline text-xl text-on-surface">Rozvody</h4>
 <a href="galerie.html" class="portfolio-overlay"><span class="material-symbols-outlined portfolio-overlay-icon text-6xl" aria-hidden="true">arrow_forward</span></a>
 </div>
 </div>
@@ -648,7 +648,7 @@
 </picture>
 <div class="p-6">
 
-<h4 class="font-headline text-xl text-on-surface">Koupelna</h4>
+<h4 data-cms="portfolio.items.1.title" class="font-headline text-xl text-on-surface">Koupelna</h4>
 <a href="galerie.html" class="portfolio-overlay"><span class="material-symbols-outlined portfolio-overlay-icon text-6xl" aria-hidden="true">arrow_forward</span></a>
 </div>
 </div>
@@ -659,7 +659,7 @@
 </picture>
 <div class="p-6">
 
-<h4 class="font-headline text-xl text-on-surface">Centrální topný uzel</h4>
+<h4 data-cms="portfolio.items.2.title" class="font-headline text-xl text-on-surface">Centrální topný uzel</h4>
 <a href="galerie.html" class="portfolio-overlay"><span class="material-symbols-outlined portfolio-overlay-icon text-6xl" aria-hidden="true">arrow_forward</span></a>
 </div>
 </div>
@@ -672,33 +672,33 @@
 </picture>
 <div class="p-6">
 
-<h4 class="font-headline text-xl text-on-surface">Podlahové topení</h4>
+<h4 data-cms="portfolio.items.3.title" class="font-headline text-xl text-on-surface">Podlahové topení</h4>
 <a href="galerie.html" class="portfolio-overlay"><span class="material-symbols-outlined portfolio-overlay-icon text-6xl" aria-hidden="true">arrow_forward</span></a>
 </div>
 </div>
 </div>
 </div>
 <div class="mt-16 text-center reveal reveal-from-bottom">
-<a class="btn-shimmer inline-block bg-primary text-on-primary px-10 py-5 font-bold tracking-[0.2em] uppercase hover:bg-primary/90 hover:scale-105 hover:shadow-xl transition-all shadow-lg active:scale-95" href="galerie.html">ZOBRAZIT VŠECHNY REFERENCE</a>
+<a class="btn-shimmer inline-block bg-primary text-on-primary px-10 py-5 font-bold tracking-[0.2em] uppercase hover:bg-primary/90 hover:scale-105 hover:shadow-xl transition-all shadow-lg active:scale-95" href="galerie.html" data-cms="portfolio.ctaText">ZOBRAZIT VŠECHNY REFERENCE</a>
 </div>
 </section>
 <!-- Testimonials -->
 <section class="bg-surface-container-low py-20 px-6">
 <div class="max-w-4xl mx-auto space-y-16">
 <div class="testimonial-block border-t border-outline-variant/30 pt-12 reveal reveal-from-bottom">
-<p class="font-headline text-2xl md:text-3xl italic leading-tight mb-8 text-on-surface">
-                    "Hledali jsme někoho na rekonstrukci koupelny. Pan Langr k práci přistoupil poctivě a výsledek stojí za to.</p>
+<p data-cms="testimonials.0.quote" class="font-headline text-2xl md:text-3xl italic leading-tight mb-8 text-on-surface">
+                    "Hledali jsme někoho na rekonstrukci koupelny. Pan Langr k práci přistoupil poctivě a výsledek stojí za to."</p>
 <div class="flex items-center gap-4">
 <div class="w-12 h-px bg-primary"></div>
-<p class="text-sm tracking-widest uppercase font-bold text-on-surface">Tomáš, Praha</p>
+<p data-cms="testimonials.0.author" class="text-sm tracking-widest uppercase font-bold text-on-surface">Tomáš, Praha</p>
 </div>
 </div>
 <div class="testimonial-block testimonial-block-right border-t border-outline-variant/30 pt-12 ml-auto max-w-2xl text-right reveal reveal-from-bottom" style="transition-delay: 0.2s">
-<p class="font-headline text-2xl md:text-3xl italic leading-tight mb-8 text-on-surface">
+<p data-cms="testimonials.1.quote" class="font-headline text-2xl md:text-3xl italic leading-tight mb-8 text-on-surface">
                     "Technické řešení vytápění našeho domu je přesně tak, jak jsme si představovali. Žádné zbytečnosti, vše čisté a perfektně funkční."
                 </p>
 <div class="flex items-center gap-4 justify-end">
-<p class="text-sm tracking-widest uppercase font-bold text-on-surface">Jana, Nymburk</p>
+<p data-cms="testimonials.1.author" class="text-sm tracking-widest uppercase font-bold text-on-surface">Jana, Nymburk</p>
 <div class="w-12 h-px bg-primary"></div>
 </div>
 </div>
@@ -710,36 +710,36 @@
 <img class="w-full h-full object-cover brightness-[0.4]" alt="Havárie vody — rychlý výjezd Nymburk, Poděbrady, Kolín, Praha" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJyK4tsJPNnQtQb8zsQ7Wvb3uzNIo3TGxgOIyKe2RIK7sM1jgxGdcZ0dF4jvMkwj9faKU5IUA2WI_30JLWpkEN_W6VJ7GbwospjCTyl02s-UMvsh5XClbWTmrD1XqXSDb1oilsy4HW_oyQYe_wd8i6ap9SkUlRcbCHh1QoExuKNTcRqD364-GGB98CBcSMOrhrHwyfRLwk9ABXATbgHxLbaI8qfHoIKsHiXWJb8dxWpIsQAIgjI_fZ0DRQilySGv7x2erxPY-dAA"/>
 </div>
 <div class="relative z-10 text-center px-6 reveal reveal-from-bottom">
-<h2 class="font-headline text-4xl md:text-6xl mb-8 text-white">Havárie nečekají.<br/>Já také ne.</h2>
+<h2 class="font-headline text-4xl md:text-6xl mb-8 text-white"><span data-cms="emergency.headingLine1">Havárie nečekají.</span><br/><span data-cms="emergency.headingLine2">Já také ne.</span></h2>
 <div class="flex flex-col md:flex-row gap-6 justify-center">
-<a class="btn-shimmer bg-primary text-on-primary px-8 py-4 font-bold tracking-widest uppercase text-sm hover:scale-105 hover:shadow-2xl transition-all shadow-xl" href="tel:+420732964228">
+<a data-cms="emergency.ctaText" data-cms-href="tel:contact.phoneHref" class="btn-shimmer bg-primary text-on-primary px-8 py-4 font-bold tracking-widest uppercase text-sm hover:scale-105 hover:shadow-2xl transition-all shadow-xl" href="tel:+420732964228">
                     VOLEJTE: +420 732 964 228
                 </a>
 </div>
-<p class="mt-6 text-xs tracking-[0.3em] uppercase font-bold text-white/70">Rychlý výjezd · Nymburk · Poděbrady · Kolín · Praha</p>
+<p data-cms="emergency.note" class="mt-6 text-xs tracking-[0.3em] uppercase font-bold text-white/70">Rychlý výjezd · Nymburk · Poděbrady · Kolín · Praha</p>
 </div>
 </section>
 <!-- Contact Section -->
 <section class="bg-white py-20 px-6" id="kontakt">
 <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
 <div class="reveal reveal-from-bottom">
-<h2 class="font-headline text-5xl md:text-6xl mb-10 text-on-surface">Spojme se.</h2>
+<h2 data-cms="contact.heading" class="font-headline text-5xl md:text-6xl mb-10 text-on-surface">Spojme se.</h2>
 <div class="space-y-10">
 <div>
 <p class="text-primary text-xs tracking-widest uppercase mb-3 font-bold">Email</p>
-<a class="contact-link font-headline text-2xl text-on-surface hover:text-primary transition-colors" href="mailto:lukaslangr11@seznam.cz">lukaslangr11@seznam.cz</a>
+<a data-cms="contact.email" data-cms-href="mailto:contact.email" class="contact-link font-headline text-2xl text-on-surface hover:text-primary transition-colors" href="mailto:lukaslangr11@seznam.cz">lukaslangr11@seznam.cz</a>
 </div>
 <div>
 <p class="text-primary text-xs tracking-widest uppercase mb-3 font-bold">Telefon</p>
-<a class="contact-link font-headline text-2xl text-on-surface hover:text-primary transition-colors" href="tel:+420732964228">+420 732 964 228</a>
+<a data-cms="contact.phone" data-cms-href="tel:contact.phoneHref" class="contact-link font-headline text-2xl text-on-surface hover:text-primary transition-colors" href="tel:+420732964228">+420 732 964 228</a>
 </div>
 <div>
 <p class="text-primary text-xs tracking-widest uppercase mb-3 font-bold">Lokalita</p>
-<p class="font-headline text-2xl text-on-surface">Nymburk · Poděbrady · Kolín · Praha</p>
+<p data-cms="contact.location" class="font-headline text-2xl text-on-surface">Nymburk · Poděbrady · Kolín · Praha</p>
 </div>
 <div>
 <p class="text-primary text-xs tracking-widest uppercase mb-3 font-bold">Provozní doba</p>
-<p class="font-headline text-2xl text-on-surface">Po–Pá 7:00–17:00 · Havárie 24/7</p>
+<p data-cms="contact.hours" class="font-headline text-2xl text-on-surface">Po–Pá 7:00–17:00 · Havárie 24/7</p>
 </div>
 </div>
 </div>
@@ -767,7 +767,7 @@
 <label class="text-xs text-primary tracking-widest uppercase mb-2 block font-bold">Zpráva</label>
 <textarea class="w-full bg-transparent border-none p-0 focus:ring-0 text-xl font-headline placeholder:text-outline-variant/50 text-on-surface" placeholder="S čím mohu pomoci?" rows="3"></textarea>
 </div>
-<button class="btn-shimmer w-full bg-primary text-on-primary py-6 font-bold tracking-[0.2em] uppercase hover:bg-primary/90 hover:shadow-xl transition-all shadow-lg active:scale-95">
+<button data-cms="contact.formButtonText" class="btn-shimmer w-full bg-primary text-on-primary py-6 font-bold tracking-[0.2em] uppercase hover:bg-primary/90 hover:shadow-xl transition-all shadow-lg active:scale-95">
                     ODESLAT DOTAZ
                 </button>
 </form>
@@ -790,12 +790,12 @@
         </svg>
         <span class="font-headline text-primary text-3xl block">LANGR</span>
       </div>
-      <p class="text-sm text-on-surface-variant leading-relaxed mb-4">
+      <p data-cms="footer.brandText" class="text-sm text-on-surface-variant leading-relaxed mb-4">
         Poctivé instalatérské a topenářské služby pro klienty v Nymburce, Poděbradech, Kolíně, Praze a po celém Středočeském kraji. Po dohodě i jinde v ČR.
       </p>
       <div class="flex items-center gap-2 mt-4">
-        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary text-on-primary text-xs font-bold">5,0</span>
-        <span class="text-xs text-on-surface-variant">· 25 hodnocení na <a href="https://www.firmy.cz" target="_blank" rel="noopener" class="text-primary hover:underline">Firmy.cz</a></span>
+        <span data-cms="footer.rating" class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary text-on-primary text-xs font-bold">5,0</span>
+        <span class="text-xs text-on-surface-variant">· <span data-cms="footer.reviewCount">25</span> hodnocení na <a href="https://www.firmy.cz" target="_blank" rel="noopener" class="text-primary hover:underline">Firmy.cz</a></span>
       </div>
     </div>
 
@@ -804,20 +804,20 @@
       <p class="text-xs tracking-[0.3em] uppercase font-bold text-primary mb-6">Kontakt</p>
       <ul class="space-y-4 text-sm text-on-surface-variant">
         <li>
-          <span class="block text-xs uppercase tracking-widest text-on-surface-variant/50 mb-1">Lukáš Langr</span>
-          <span class="text-on-surface font-medium">IČO: 74215752</span>
+          <span data-cms="footer.name" class="block text-xs uppercase tracking-widest text-on-surface-variant/50 mb-1">Lukáš Langr</span>
+          <span class="text-on-surface font-medium">IČO: <span data-cms="footer.ico">74215752</span></span>
         </li>
         <li>
           <span class="block text-xs uppercase tracking-widest text-on-surface-variant/50 mb-1">Adresa</span>
-          <span class="text-on-surface font-medium">Josefa Mánesa 1883<br/>288 02 Nymburk</span>
+          <span data-cms-html="footer.address" class="text-on-surface font-medium">Josefa Mánesa 1883<br/>288 02 Nymburk</span>
         </li>
         <li>
           <span class="block text-xs uppercase tracking-widest text-on-surface-variant/50 mb-1">Telefon</span>
-          <a href="tel:+420732964228" class="text-on-surface font-medium hover:text-primary transition-colors">+420 732 964 228</a>
+          <a data-cms="contact.phone" data-cms-href="tel:contact.phoneHref" href="tel:+420732964228" class="text-on-surface font-medium hover:text-primary transition-colors">+420 732 964 228</a>
         </li>
         <li>
           <span class="block text-xs uppercase tracking-widest text-on-surface-variant/50 mb-1">E-mail</span>
-          <a href="mailto:lukaslangr11@seznam.cz" class="text-on-surface font-medium hover:text-primary transition-colors">lukaslangr11@seznam.cz</a>
+          <a data-cms="contact.email" data-cms-href="mailto:contact.email" href="mailto:lukaslangr11@seznam.cz" class="text-on-surface font-medium hover:text-primary transition-colors">lukaslangr11@seznam.cz</a>
         </li>
       </ul>
     </div>
@@ -833,16 +833,16 @@
         <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-primary/40 inline-block"></span><span class="text-on-surface-variant/60">Po dohodě celá ČR</span></li>
       </ul>
       <p class="text-xs tracking-[0.3em] uppercase font-bold text-primary mb-3">Provozní doba</p>
-      <p class="text-sm text-on-surface-variant">Po–Pá 7:00–17:00</p>
-      <p class="text-sm text-on-surface font-medium">Havárie 24/7</p>
+      <p data-cms="footer.hoursNormal" class="text-sm text-on-surface-variant">Po–Pá 7:00–17:00</p>
+      <p data-cms="footer.hoursEmergency" class="text-sm text-on-surface font-medium">Havárie 24/7</p>
     </div>
 
   </div>
 
   <!-- Spodní část: copyright -->
   <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-8">
-    <p class="text-xs text-on-surface-variant/50 tracking-widest uppercase">© 2026 Lukáš Langr · Instalatérské služby Nymburk</p>
-    <p class="text-xs text-on-surface-variant/50">IČO 74215752 · <a href="instalater-nymburk.cz" class="hover:text-primary transition-colors">instalater-nymburk.cz</a></p>
+    <p data-cms="footer.copyright" class="text-xs text-on-surface-variant/50 tracking-widest uppercase">© 2026 Lukáš Langr · Instalatérské služby Nymburk</p>
+    <p class="text-xs text-on-surface-variant/50">IČO 74215752 · <a data-cms="footer.domain" href="https://instalater-nymburk.cz" class="hover:text-primary transition-colors">instalater-nymburk.cz</a></p>
   </div>
 
 </div>
@@ -924,4 +924,5 @@
     }, { threshold: 0.6 });
     document.querySelectorAll(".counter").forEach(el => counterObserver.observe(el));
 </script>
+<script src="js/content-loader.js"></script>
 </body></html>

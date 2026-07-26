@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html class="light" lang="cs">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>Administrace | LANGR</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#1a6fb5",
+        "on-primary": "#ffffff",
+        "surface": "#fbf9f6",
+        "surface-container": "#efeeeb",
+        "surface-container-low": "#f5f3f0",
+        "surface-container-lowest": "#ffffff",
+        "on-surface": "#1b1c1a",
+        "on-surface-variant": "#414751",
+        "outline-variant": "#c1c7d2",
+        "error": "#ba1a1a",
+        "success": "#1e7b34",
+        "background": "#fbf9f6"
+      },
+      borderRadius: { DEFAULT: "4px", lg: "4px", xl: "8px", full: "9999px" },
+      fontFamily: {
+        headline: ["Noto Serif"],
+        body: ["Plus Jakarta Sans"]
+      }
+    }
+  }
+}
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+
+  /* === Sidebar nav === */
+  .nav-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px;
+    font-size: 13px; letter-spacing: 0.05em;
+    color: #414751; cursor: pointer;
+    border-left: 2px solid transparent;
+    transition: all 0.25s ease;
+    user-select: none;
+  }
+  .nav-item:hover { background: rgba(26,111,181,0.05); color: #1a6fb5; }
+  .nav-item.active {
+    background: rgba(26,111,181,0.08);
+    color: #1a6fb5;
+    border-left-color: #1a6fb5;
+    font-weight: 700;
+  }
+
+  /* === Panely sekcí === */
+  .panel { display: none; }
+  .panel.active { display: block; animation: fadeIn 0.35s ease; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* === Form fields === */
+  .field label {
+    display: block;
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    font-weight: 700; color: #1a6fb5; margin-bottom: 6px;
+  }
+  .field input, .field textarea {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid rgba(193,199,210,0.5);
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-size: 15px;
+    color: #1b1c1a;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .field input:focus, .field textarea:focus {
+    outline: none;
+    border-color: #1a6fb5;
+    box-shadow: 0 0 0 3px rgba(26,111,181,0.1);
+  }
+  .field textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+  .field .hint { font-size: 11px; color: #414751; opacity: 0.6; margin-top: 4px; }
+  .field.dirty input, .field.dirty textarea { border-color: #1a6fb5; background: rgba(26,111,181,0.02); }
+
+  /* === Shimmer tlačítko (jako na webu) === */
+  .btn-shimmer { position: relative; overflow: hidden; }
+  .btn-shimmer::after {
+    content: ''; position: absolute; top: 0; left: -80%;
+    width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+    transform: skewX(-20deg); transition: left 0.65s ease;
+  }
+  .btn-shimmer:hover::after { left: 150%; }
+
+  /* === Toasty === */
+  #toast-container {
+    position: fixed; top: 24px; right: 24px;
+    z-index: 9999;
+    display: flex; flex-direction: column; gap: 10px;
+    pointer-events: none;
+  }
+  .toast {
+    display: flex; align-items: flex-start; gap: 12px;
+    min-width: 300px; max-width: 420px;
+    padding: 14px 18px;
+    background: #ffffff;
+    border-left: 3px solid #1a6fb5;
+    border-radius: 4px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+    font-size: 14px; color: #1b1c1a;
+    transform: translateX(120%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.34, 1.3, 0.64, 1), opacity 0.35s ease;
+    pointer-events: all;
+  }
+  .toast.show { transform: translateX(0); opacity: 1; }
+  .toast.success { border-left-color: #1e7b34; }
+  .toast.error   { border-left-color: #ba1a1a; }
+  .toast.info    { border-left-color: #1a6fb5; }
+  .toast-icon { font-size: 20px; line-height: 1; flex-shrink: 0; }
+  .toast.success .toast-icon { color: #1e7b34; }
+  .toast.error   .toast-icon { color: #ba1a1a; }
+  .toast.info    .toast-icon { color: #1a6fb5; }
+  .toast-title { font-weight: 700; margin-bottom: 2px; }
+  .toast-msg { font-size: 13px; color: #414751; line-height: 1.45; }
+
+  /* === Spinner === */
+  .spinner {
+    width: 16px; height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: inline-block;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* === Mobilní sidebar === */
+  @media (max-width: 900px) {
+    #sidebar {
+      position: fixed; inset: 0 auto 0 0;
+      transform: translateX(-100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+      z-index: 60; width: 260px;
+      box-shadow: 4px 0 24px rgba(0,0,0,0.1);
+    }
+    #sidebar.open { transform: translateX(0); }
+    #sidebar-backdrop { display: none; }
+    #sidebar-backdrop.open {
+      display: block; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.4); z-index: 55;
+    }
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #f5f3f0; }
+  ::-webkit-scrollbar-thumb { background: #c1c7d2; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #1a6fb5; }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body">
+
+<div id="toast-container"></div>
+
+<!-- ============ PŘIHLÁŠENÍ ============ -->
+<div id="login-screen" class="min-h-screen flex items-center justify-center px-6">
+  <div class="w-full max-w-md">
+
+    <div class="flex items-center gap-2 mb-8 justify-center">
+      <svg class="w-8 h-8 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M5 0.8c-0.5 1.3-2.5 3.6-2.5 5.4a2.5 2.5 0 0 0 5 0c0-1.8-2-4.1-2.5-5.4z" fill="currentColor"/>
+      </svg>
+      <span class="font-headline text-primary text-3xl">LANGR</span>
+    </div>
+
+    <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-8 shadow-sm">
+      <p class="text-primary text-[10px] tracking-[0.3em] uppercase font-bold mb-2">Administrace</p>
+      <h1 class="font-headline text-2xl mb-6">Přihlášení</h1>
+
+      <div class="field mb-5">
+        <label for="token-input">GitHub Personal Access Token</label>
+        <input id="token-input" type="password" placeholder="github_pat_..." autocomplete="off" spellcheck="false"/>
+        <p class="hint">Token se uloží pouze do tohoto prohlížeče (localStorage). Nikam se neodesílá kromě GitHub API.</p>
+      </div>
+
+      <label class="flex items-center gap-2 mb-6 text-sm text-on-surface-variant cursor-pointer select-none">
+        <input id="remember-token" type="checkbox" class="rounded border-outline-variant text-primary focus:ring-primary" checked/>
+        Zapamatovat token v tomto prohlížeči
+      </label>
+
+      <button id="login-btn" class="btn-shimmer w-full bg-primary text-on-primary py-4 font-bold tracking-[0.15em] uppercase text-sm hover:bg-primary/90 transition-all active:scale-95 shadow-lg flex items-center justify-center gap-3">
+        <span id="login-btn-text">PŘIHLÁSIT SE</span>
+      </button>
+
+      <div class="mt-6 pt-6 border-t border-outline-variant/20">
+        <p class="text-xs text-on-surface-variant leading-relaxed">
+          <strong class="text-on-surface">Jak získat token:</strong><br/>
+          GitHub → Settings → Developer settings → Personal access tokens →
+          <strong>Fine-grained tokens</strong> → Generate new token.<br/><br/>
+          <strong class="text-on-surface">Repository access:</strong> Only select repositories → <code class="bg-surface-container px-1 rounded">instal-langr</code><br/>
+          <strong class="text-on-surface">Permissions:</strong> Repository permissions → <code class="bg-surface-container px-1 rounded">Contents: Read and write</code>
+        </p>
+      </div>
+    </div>
+
+    <p class="text-center text-xs text-on-surface-variant/50 mt-6">
+      <a href="../index.html" class="hover:text-primary transition-colors">← Zpět na web</a>
+    </p>
+  </div>
+</div>
+
+<!-- ============ ADMIN PANEL ============ -->
+<div id="admin-screen" class="hidden min-h-screen flex">
+
+  <div id="sidebar-backdrop"></div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="w-[260px] flex-shrink-0 bg-surface-container-lowest border-r border-outline-variant/30 flex flex-col">
+    <div class="p-6 border-b border-outline-variant/20">
+      <div class="flex items-center gap-2">
+        <svg class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M5 0.8c-0.5 1.3-2.5 3.6-2.5 5.4a2.5 2.5 0 0 0 5 0c0-1.8-2-4.1-2.5-5.4z" fill="currentColor"/>
+        </svg>
+        <span class="font-headline text-primary text-2xl">LANGR</span>
+      </div>
+      <p class="text-[10px] tracking-[0.25em] uppercase text-on-surface-variant/60 font-bold mt-2">Administrace obsahu</p>
+    </div>
+
+    <nav id="section-nav" class="flex-1 overflow-y-auto py-4"></nav>
+
+    <div class="p-4 border-t border-outline-variant/20 space-y-2">
+      <a href="../index.html" target="_blank" class="nav-item rounded" style="border-left-color:transparent">
+        <span class="material-symbols-outlined text-[18px]">open_in_new</span>
+        Zobrazit web
+      </a>
+      <div id="logout-btn" class="nav-item rounded" style="border-left-color:transparent">
+        <span class="material-symbols-outlined text-[18px]">logout</span>
+        Odhlásit se
+      </div>
+    </div>
+  </aside>
+
+  <!-- Hlavní obsah -->
+  <div class="flex-1 flex flex-col min-w-0">
+
+    <!-- Horní lišta -->
+    <header class="sticky top-0 z-40 bg-surface/95 backdrop-blur-xl border-b border-outline-variant/20 px-6 md:px-10 py-4 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 min-w-0">
+        <button id="menu-toggle" class="lg:hidden p-2 -ml-2 text-on-surface-variant hover:text-primary transition-colors">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+        <div class="min-w-0">
+          <h2 id="current-section-title" class="font-headline text-xl md:text-2xl truncate">Hero sekce</h2>
+          <p id="dirty-indicator" class="text-[11px] text-on-surface-variant/60 hidden">
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-primary mr-1 align-middle"></span>Neuložené změny
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 flex-shrink-0">
+        <button id="reload-btn" class="p-2.5 text-on-surface-variant hover:text-primary hover:bg-surface-container rounded transition-all" title="Načíst znovu z GitHubu">
+          <span class="material-symbols-outlined text-[20px]">refresh</span>
+        </button>
+        <button id="save-btn" class="btn-shimmer bg-primary text-on-primary px-6 md:px-8 py-3 font-bold tracking-[0.15em] uppercase text-xs hover:bg-primary/90 transition-all active:scale-95 shadow-lg flex items-center gap-2.5 disabled:opacity-50 disabled:cursor-not-allowed">
+          <span class="material-symbols-outlined text-[18px]">cloud_upload</span>
+          <span id="save-btn-text">ULOŽIT</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Formuláře -->
+    <main class="flex-1 px-6 md:px-10 py-8 max-w-4xl w-full">
+      <div id="panels"></div>
+    </main>
+
+    <footer class="px-6 md:px-10 py-4 border-t border-outline-variant/20 text-[11px] text-on-surface-variant/50 flex flex-wrap gap-x-4 gap-y-1">
+      <span id="repo-info"></span>
+      <span id="last-saved"></span>
+    </footer>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
