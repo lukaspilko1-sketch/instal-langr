@@ -24,6 +24,10 @@ důvěryhodnost a přímý kontakt. Žádný e-shop, žádné přihlašování.
 ```
 /
 ├── index.html          # Jediný soubor — celá SPA stránka
+├── img/
+│   └── hero/
+│       ├── hero.png    # Zdrojová fotka (needitovaná, neverzuje se do stránky)
+│       └── hero.webp   # Optimalizovaná hero fotka použitá v index.html
 ├── .gitattributes      # LF normalizace
 └── CLAUDE.md           # Tento soubor
 ```
@@ -41,7 +45,7 @@ důvěryhodnost a přímý kontakt. Žádný e-shop, žádné přihlašování.
 | JS            | Vanilla JS (inline `<script>`)       | ES2020+, bez frameworku       |
 | Fonty         | Google Fonts (CDN)                   | Noto Serif + Plus Jakarta Sans |
 | Ikony         | Material Symbols Outlined (CDN)      | Variable font                 |
-| Obrázky       | Google AIDA public CDN               | 🔴 PLACEHOLDER — vyměnit!    |
+| Obrázky       | Lokální WebP (`img/hero/`) + Google AIDA public CDN | Hero foto lokální, zbytek (portfolio, banner, grain) 🔴 stále PLACEHOLDER |
 
 **Tailwind config** je inline v `<script id="tailwind-config">` — rozšiřuje téma
 o vlastní barvy (Material Design 3 token sada), border-radius a font-family.
@@ -98,6 +102,15 @@ full          →  9999px
 ---
 
 ## 🧩 Komponenty & Interakce
+
+### Hero fotka (`img/hero/hero.webp`)
+- Zdroj: `img/hero/hero.png` (needitovaný originál, ponechán pro budoucí úpravy), pozadí odstraněno
+  (connected-component detekce šachovnicového pozadí + jemný alpha ramp na okrajích), nohy oříznuty
+  pod lem trička, export do WebP (q85, ~95 KB).
+- Mobil: `object-cover object-top` — fotka vyplňuje celý `h-[400px]` box, ořez zespoda.
+- Desktop (`md:`): `md:py-14` + `md:object-contain md:object-bottom` — fotka je cca o 20 % menší
+  než původní `cover` verze, je vidět celé tělo (hlava po pas) a spodní okraj fotky vždy navazuje
+  na Stats Strip bez mezery (případný prostor navíc se posune nahoru pod navigaci, ne dolů).
 
 ### Navigace (`<nav>`)
 - Fixed top, `z-50`, backdrop-blur
@@ -190,7 +203,7 @@ Portfolio: [4 položky]
 
 | # | Typ         | Popis                                      | Priorita |
 |---|-------------|---------------------------------------------|----------|
-| 1 | Obrázek     | Hero foto Lukáše Langra (AIDA CDN)         | 🔴 HIGH  |
+| 1 | ~~Obrázek~~ | ~~Hero foto Lukáše Langra (AIDA CDN)~~ — ✅ nahrazeno reálnou fotkou (`img/hero/hero.webp`) | ✅ HOTOVO |
 | 2 | Obrázek     | 4× portfolio fotky (AIDA CDN)              | 🔴 HIGH  |
 | 3 | Obrázek     | Emergency banner pozadí (AIDA CDN)         | 🟡 MED   |
 | 4 | Obrázek     | Grain texture (AIDA CDN)                   | 🟢 LOW   |
@@ -206,7 +219,8 @@ Portfolio: [4 položky]
 ## ✅ TODO Seznam
 
 ### 🔴 Kritické (před spuštěním)
-- [ ] Nahradit všechny AIDA CDN obrázky reálnými fotkami klienta
+- [x] Nahradit hero foto reálnou fotkou klienta (WebP, `img/hero/hero.webp`)
+- [ ] Nahradit zbylé AIDA CDN obrázky (portfolio, emergency banner) reálnými fotkami klienta
 - [ ] Napojit formulář (Formspree / Netlify Forms / mailto fallback)
 - [ ] Přidat grain texturu jako lokální soubor (ne CDN)
 - [ ] Otestovat na iOS Safari (viewport, sticky nav)
@@ -302,6 +316,15 @@ chore: aktualizován copyright
 - ✅ Aktivní nav link highlight
 - 🔴 Obrázky jsou AIDA CDN placeholdery
 - 🔴 Formulář neodesílá data
+
+### v0.2.0 — Hero fotka (18. 8. 2026)
+- ✅ Hero foto nahrazeno reálnou fotkou klienta (`img/hero/hero.png` → `img/hero/hero.webp`)
+- ✅ Odstranění pozadí (connected-component detekce + alpha ramp na okrajích, bez artefaktů u paží)
+- ✅ Ořez nohou pod lem trička
+- ✅ Optimalizace do WebP: 1,84 MB → ~95 KB
+- ✅ Desktop: fotka zmenšena o ~20 % (`md:object-contain md:object-bottom md:py-14`), je vidět
+  celé tělo, spodní okraj navazuje na Stats Strip bez mezery
+- 🔴 Zbylé AIDA CDN obrázky (portfolio, emergency banner, grain texture) stále placeholdery
 
 ---
 
